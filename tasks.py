@@ -71,3 +71,20 @@ def build_docs(ctx: Context) -> None:
 def serve_docs(ctx: Context) -> None:
     """Serve documentation."""
     ctx.run("mkdocs serve --config-file docs/mkdocs.yaml", echo=True, pty=not WINDOWS)
+
+
+# formatting and linting task code
+@task
+def lint(ctx) -> None:
+    """Run linters."""
+    ctx.run("ruff check . --fix", echo=True, pty=not WINDOWS, warn=True)
+    ctx.run("ruff format .", echo=True, pty=not WINDOWS, warn=True)
+    ctx.run("mypy .", echo=True, pty=not WINDOWS)
+
+
+# git commands task code
+@task
+def git_upload(ctx, message):
+    ctx.run("git add .")
+    ctx.run(f'git commit -m "{message}"')
+    ctx.run("git push")
