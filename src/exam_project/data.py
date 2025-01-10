@@ -51,8 +51,8 @@ def preprocess(raw_data_path: Path, output_folder: Path) -> None:
     print("Data preprocessed and saved to processed directory.")
 
     # Display one image
-    plt.imshow(train_images[0].squeeze(), cmap='gray')
-    plt.imsave("sample_image.png", train_images[0].squeeze(), cmap='gray')
+    plt.imshow(train_images[0].squeeze())
+    plt.imsave("sample_image.png", train_images[0].squeeze())
     plt.title("Sample Image")
     plt.show()
 
