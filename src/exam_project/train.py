@@ -53,21 +53,36 @@ def train(lr: float = 0.001, batch_size: int = 32, epochs: int = 5) -> None:
             if i % 100 == 0:
                 print(f"Epoch {epoch}, Step {i}, Loss: {loss.item()}, Accuracy: {(y_pred.argmax(dim=1) == target).float().mean().item()}")
                  # add a plot of the input images
-                image = wandb.Image(img[0].detach().cpu(), caption="Input images")
+                
+                plotting_image = img[0].permute(1, 2, 0).detach().cpu() 
+                image = wandb.Image(plotting_image, caption="Input images")
                 wandb.log({"images": image})
+        
         model.eval()
-
         with torch.no_grad():
+            # calculate validation loss and accuracy
+            val_loss = 0.0
+            val_accuracy = 0.0
+            total = 0
+
             for img, target in val_dataloader:
                 img, target = img.to(DEVICE), target.to(DEVICE)
                 y_pred = model(img)
                 loss = loss_fn(y_pred, target)
                 
-                accuracy = (y_pred.argmax(dim=1) == target).float().mean().item()
-                wandb.log({
-                    "val_loss": loss.item(),
-                    "val_accuracy": accuracy
-                })
+                val_loss += loss.item() * img.size(0)
+                val_accuracy += (y_pred.argmax(dim=1) == target).sum().item()
+                total += img.size(0)
+
+            val_loss /= total
+            val_accuracy /= total
+
+            wandb.log({
+                "val_loss": val_loss,
+                "val_accuracy": val_accuracy
+            })
+            
+ 
                 
         torch.save(model.state_dict(), "models/model.pth")
 if __name__ == "__main__":
