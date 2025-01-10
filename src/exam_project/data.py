@@ -17,7 +17,7 @@ def preprocess(raw_data_path: Path, output_folder: Path) -> None:
         for filename in os.listdir(folder):
             img_path = os.path.join(folder, filename)
             if os.path.isfile(img_path) and img_path.endswith('.jpg'):
-                img = Image.open(img_path).convert('L')
+                img = Image.open(img_path).resize((224, 224))
                 img_tensor = torch.tensor(np.array(img), dtype=torch.float32)
                 images.append(img_tensor)
         return torch.stack(images)
@@ -37,9 +37,13 @@ def preprocess(raw_data_path: Path, output_folder: Path) -> None:
     test_images = torch.cat((test_images_benign, test_images_malignant))
     test_target = torch.cat((torch.zeros(len(test_images_benign)), torch.ones(len(test_images_malignant))))
 
-    train_images = train_images.unsqueeze(1)
-    test_images = test_images.unsqueeze(1)
+    
+    
+    train_images = train_images.view(-1,3,224,224)
+    test_images = test_images.view(-1,3,224,224)
 
+    print(test_images.shape)
+    
     torch.save(train_images, output_folder / "train_images.pt")
     torch.save(train_target, output_folder / "train_target.pt")
     torch.save(test_images, output_folder / "test_images.pt")
