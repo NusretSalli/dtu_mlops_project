@@ -5,6 +5,7 @@ from torch.utils.data import Dataset
 from PIL import Image
 import os
 import numpy as np
+from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
     
 
@@ -49,22 +50,25 @@ def preprocess(raw_data_path: Path, output_folder: Path) -> None:
     print("Data preprocessed and saved to processed directory.")
 
     # Display one image
-    plt.imshow(train_images[0])
-    plt.imsave("sample_image.png", train_images[0])
-    plt.title("Sample Image")
-    plt.show()
+    #plt.imshow(train_images[0])
+    #plt.imsave("sample_image.png", train_images[0])
+    #plt.title("Sample Image")
+    #plt.show()
 
-def melanoma_data() -> tuple[torch.utils.data.Dataset, torch.utils.data.Dataset] :
+def melanoma_data() -> tuple[torch.utils.data.Dataset, torch.utils.data.Dataset, torch.utils.data.Dataset] :
     data_path = "data/processed"
-    train_images = torch.load(data_path + "/train_images.pt", weights_only=True)
-    train_target = torch.load(data_path + "/train_target.pt", weights_only=True)
-    test_images = torch.load(data_path + "/test_images.pt", weights_only=True)
-    test_target = torch.load(data_path + "/test_target.pt", weights_only=True)
+    train_images = torch.load(data_path + "/train_images.pt",weights_only=True)
+    train_target = torch.load(data_path + "/train_target.pt",weights_only=True)
+    test_images = torch.load(data_path + "/test_images.pt",weights_only=True)
+    test_target = torch.load(data_path + "/test_target.pt",weights_only=True)
+    
+    train_images, val_images, train_target, val_target = train_test_split(train_images, train_target, test_size=0.1, random_state=42)
     
     train_dataset = torch.utils.data.TensorDataset(train_images, train_target)
+    val_dataset = torch.utils.data.TensorDataset(val_images, val_target)
     test_dataset = torch.utils.data.TensorDataset(test_images, test_target)
     
-    return train_dataset, test_dataset
+    return train_dataset, val_dataset, test_dataset
 
 if __name__ == "__main__":
     typer.run(preprocess)
