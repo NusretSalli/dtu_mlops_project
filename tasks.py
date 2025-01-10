@@ -8,7 +8,7 @@ PYTHON_VERSION = "3.11"
 
 # Setup commands
 @task
-def create_environment(ctx: Context) -> None:
+def createenvironment(ctx: Context) -> None:
     """Create a new conda environment for project."""
     ctx.run(
         f"conda create --name {PROJECT_NAME} python={PYTHON_VERSION} pip --no-default-packages --yes",
