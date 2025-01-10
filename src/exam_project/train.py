@@ -10,7 +10,7 @@ from data import melanoma_data
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu")
 
-def train(lr: float = 0.001, batch_size: int = 32, epochs: int = 1) -> None:
+def train(lr: float = 0.001, batch_size: int = 32, epochs: int = 5) -> None:
     """Train a model on Melanoma dataset."""
     
     wandb.init(
@@ -31,7 +31,7 @@ def train(lr: float = 0.001, batch_size: int = 32, epochs: int = 1) -> None:
     model = ResNet18().to(DEVICE)
     train_set, _ = melanoma_data()
 
-    train_dataloader = torch.utils.data.DataLoader(train_set, batch_size=batch_size)
+    train_dataloader = torch.utils.data.DataLoader(train_set, batch_size=batch_size,shuffle=True)
 
     loss_fn = torch.nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=lr)

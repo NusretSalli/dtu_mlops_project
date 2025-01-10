@@ -38,11 +38,9 @@ def preprocess(raw_data_path: Path, output_folder: Path) -> None:
     test_target = torch.cat((torch.zeros(len(test_images_benign)), torch.ones(len(test_images_malignant))))
 
     
-    
+    # Reshape for PyTorch (N, C, H, W)
     train_images = train_images.view(-1,3,224,224)
     test_images = test_images.view(-1,3,224,224)
-
-    print(test_images.shape)
     
     torch.save(train_images, output_folder / "train_images.pt")
     torch.save(train_target, output_folder / "train_target.pt")
@@ -51,17 +49,17 @@ def preprocess(raw_data_path: Path, output_folder: Path) -> None:
     print("Data preprocessed and saved to processed directory.")
 
     # Display one image
-    plt.imshow(train_images[0].squeeze())
-    plt.imsave("sample_image.png", train_images[0].squeeze())
+    plt.imshow(train_images[0])
+    plt.imsave("sample_image.png", train_images[0])
     plt.title("Sample Image")
     plt.show()
 
 def melanoma_data() -> tuple[torch.utils.data.Dataset, torch.utils.data.Dataset] :
     data_path = "data/processed"
-    train_images = torch.load(data_path + "/train_images.pt")
-    train_target = torch.load(data_path + "/train_target.pt")
-    test_images = torch.load(data_path + "/test_images.pt")
-    test_target = torch.load(data_path + "/test_target.pt")
+    train_images = torch.load(data_path + "/train_images.pt", weights_only=True)
+    train_target = torch.load(data_path + "/train_target.pt", weights_only=True)
+    test_images = torch.load(data_path + "/test_images.pt", weights_only=True)
+    test_target = torch.load(data_path + "/test_target.pt", weights_only=True)
     
     train_dataset = torch.utils.data.TensorDataset(train_images, train_target)
     test_dataset = torch.utils.data.TensorDataset(test_images, test_target)
