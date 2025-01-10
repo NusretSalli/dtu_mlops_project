@@ -4,26 +4,22 @@ import typer
 from torch.utils.data import Dataset
 
 
-class MyDataset(Dataset):
-    """My custom dataset."""
+from pathlib import Path
+from collections import Counter
+from PIL import Image
+import typer
 
-    def __init__(self, raw_data_path: Path) -> None:
-        self.data_path = raw_data_path
+def get_image_shapes(data_dir: str):
+    data_path = Path(data_dir)
+    shapes = Counter()
 
-    def __len__(self) -> int:
-        """Return the length of the dataset."""
+    for image_path in data_path.glob("**/*"):
+        if image_path.is_file() and image_path.suffix in [".jpg", ".jpeg", ".png", ".bmp", ".gif"]:
+            with Image.open(image_path) as img:
+                shapes[img.size] += 1
 
-    def __getitem__(self, index: int):
-        """Return a given sample from the dataset."""
-
-    def preprocess(self, output_folder: Path) -> None:
-        """Preprocess the raw data and save it to the output folder."""
-
-def preprocess(raw_data_path: Path, output_folder: Path) -> None:
-    print("Preprocessing data...")
-    dataset = MyDataset(raw_data_path)
-    dataset.preprocess(output_folder)
-
+    for shape, count in shapes.items():
+        print(f"Shape: {shape}, Count: {count}")
 
 if __name__ == "__main__":
-    typer.run(preprocess)
+    typer.run(get_image_shapes)
