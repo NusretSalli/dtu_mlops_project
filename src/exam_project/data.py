@@ -34,9 +34,9 @@ def preprocess(raw_data_path: Path, output_folder: Path) -> None:
     test_images_malignant = load_images_from_folder(test_malignant_path)
 
     train_images = torch.cat((train_images_benign, train_images_malignant))
-    train_target = torch.cat((torch.zeros(len(train_images_benign)), torch.ones(len(train_images_malignant))))
+    train_target = torch.cat((torch.zeros(len(train_images_benign)), torch.ones(len(train_images_malignant)))).long()
     test_images = torch.cat((test_images_benign, test_images_malignant))
-    test_target = torch.cat((torch.zeros(len(test_images_benign)), torch.ones(len(test_images_malignant))))
+    test_target = torch.cat((torch.zeros(len(test_images_benign)), torch.ones(len(test_images_malignant)))).long()
 
     
     # Reshape for PyTorch (N, C, H, W)
