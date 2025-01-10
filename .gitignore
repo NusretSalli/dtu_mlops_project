@@ -1,5 +1,9 @@
 docs/site/
 
+# processed data
+data/processed/
+
+
 # test cache
 manual_test/
 
