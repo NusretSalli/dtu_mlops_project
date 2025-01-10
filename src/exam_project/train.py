@@ -8,7 +8,7 @@ from model import ResNet18
 from data import melanoma_data
 
 
-DEVICE = torch.device("cpu")
+DEVICE = torch.device("cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu")
 
 def train(lr: float = 0.001, batch_size: int = 32, epochs: int = 5) -> None:
     """Train a model on Melanoma dataset."""
@@ -44,7 +44,7 @@ def train(lr: float = 0.001, batch_size: int = 32, epochs: int = 5) -> None:
             img, target = img.to(DEVICE), target.to(DEVICE)
             optimizer.zero_grad()
             y_pred = model(img)
-            loss = loss_fn(y_pred, target)
+            loss = loss_fn(y_pred, target.to(torch.long))
             loss.backward()
             optimizer.step()
             
@@ -54,9 +54,9 @@ def train(lr: float = 0.001, batch_size: int = 32, epochs: int = 5) -> None:
                 print(f"Epoch {epoch}, Step {i}, Loss: {loss.item()}, Accuracy: {(y_pred.argmax(dim=1) == target).float().mean().item()}")
                  # add a plot of the input images
                 
-                plotting_image = img[0].permute(1, 2, 0).detach().cpu() 
-                image = wandb.Image(plotting_image, caption="Input images")
-                wandb.log({"images": image})
+                #plotting_image = img[0].permute(1, 2, 0).detach().cpu() 
+                #image = wandb.Image(plotting_image, caption="Input images")
+                #wandb.log({"images": image})
         
         model.eval()
         with torch.no_grad():
@@ -68,7 +68,7 @@ def train(lr: float = 0.001, batch_size: int = 32, epochs: int = 5) -> None:
             for img, target in val_dataloader:
                 img, target = img.to(DEVICE), target.to(DEVICE)
                 y_pred = model(img)
-                loss = loss_fn(y_pred, target)
+                loss = loss_fn(y_pred, target.to(torch.long))
                 
                 val_loss += loss.item() * img.size(0)
                 val_accuracy += (y_pred.argmax(dim=1) == target).sum().item()
