@@ -1,7 +1,7 @@
 import pytest
 import torch
 
-from exam_project.model import ResNet18
+from src.exam_project.model import ResNet18
 
 
 def test_model():

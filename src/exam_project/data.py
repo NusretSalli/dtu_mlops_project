@@ -70,10 +70,10 @@ def visualize_image(image: torch.Tensor) -> None:
 def melanoma_data() -> tuple[torch.utils.data.Dataset, torch.utils.data.Dataset, torch.utils.data.Dataset]:
     """Load preprocessed data and split into train, validation, and test sets."""
     data_path = "data/processed"
-    train_images = torch.load(data_path + "/train_images.pt")
-    train_target = torch.load(data_path + "/train_target.pt")
-    test_images = torch.load(data_path + "/test_images.pt")
-    test_target = torch.load(data_path + "/test_target.pt")
+    train_images = torch.load(data_path + "/train_images.pt", weights_only=True)
+    train_target = torch.load(data_path + "/train_target.pt", weights_only=True)
+    test_images = torch.load(data_path + "/test_images.pt", weights_only=True)
+    test_target = torch.load(data_path + "/test_target.pt", weights_only=True)
 
     # Split training data into training and validation sets
     train_images, val_images, train_target, val_target = train_test_split(

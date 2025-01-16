@@ -1,6 +1,6 @@
 from torch.utils.data import Dataset
 import pytest
-from exam_project.data import melanoma_data
+from src.exam_project.data import melanoma_data
 import os.path
 
 
