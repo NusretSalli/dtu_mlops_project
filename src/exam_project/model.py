@@ -1,5 +1,5 @@
 import torch
-import torch.nn as nn 
+import torch.nn as nn
 from torchvision import models
 
 
@@ -15,9 +15,9 @@ class ResNet18(nn.Module):
     def forward(self, x):
         if x.ndim != 4:
             raise ValueError(f"Expected input to have 4D tensor")
-        
+
         return self.model(x)
-    
+
 
 
 
@@ -26,7 +26,7 @@ if __name__ == "__main__":
     print(f"Model architecture: {model}")
     print(f"Number of parameters: {sum(p.numel() for p in model.parameters())}")
 
-    
+
     dummy_input = torch.randn(1, 3, 224, 224)
     output = model(dummy_input)
     print(output)

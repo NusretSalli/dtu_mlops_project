@@ -11,7 +11,7 @@ def visualize_model_pred() -> None:
     # Load model from checkpoint
     model = ResNet18()
     model.load_state_dict(torch.load("models/model.pth"))
-    
+
     # Set model to evaluation mode
     model.eval()
 
@@ -43,7 +43,7 @@ def visualize_model_pred() -> None:
         saliency_map = saliency_map.squeeze().permute(1, 2, 0).detach().numpy()  # (C, H, W) -> (H, W, C)
         saliency_map = (saliency_map - saliency_map.min()) / (saliency_map.max() - saliency_map.min())  # Normalize
         return saliency_map
-    
+
     saliency_map = compute_saliency(model, image_with_batch, predicted)
 
     # GradientSHAP
@@ -56,7 +56,7 @@ def visualize_model_pred() -> None:
         )
         attributions_gshap = attributions_gshap.squeeze().permute(1, 2, 0).detach().numpy()  # (C, H, W) -> (H, W, C)
         return attributions_gshap
-    
+
     attributions_gshap = compute_gradientshap(model, image_with_batch, predicted)
 
     # Occlusion
@@ -67,7 +67,7 @@ def visualize_model_pred() -> None:
         )
         attributions_occlusion = attributions_occlusion.squeeze().permute(1, 2, 0).detach().numpy()  # (C, H, W) -> (H, W, C)
         return attributions_occlusion
-    
+
     attributions_occlusion = compute_occlusion(model, image_with_batch, predicted)
 
     # LIME
@@ -78,7 +78,7 @@ def visualize_model_pred() -> None:
         )
         attributions_lime = attributions_lime.squeeze().permute(1, 2, 0).detach().numpy()  # (C, H, W) -> (H, W, C)
         return attributions_lime
-    
+
     attributions_lime = compute_lime(model, image_with_batch, predicted)
 
     # Set up a 2x3 grid for the plots

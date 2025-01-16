@@ -8,7 +8,7 @@ import os.path
 def test_my_dataset():
     """Test the MyDataset class."""
     train, validation, test = melanoma_data()
-    
+
     assert isinstance(train, Dataset)
     assert isinstance(validation, Dataset)
     assert isinstance(test, Dataset)
