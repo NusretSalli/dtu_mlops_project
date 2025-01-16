@@ -13,7 +13,11 @@ class ResNet18(nn.Module):
         self.model = resnet
 
     def forward(self, x):
+        if x.ndim != 4:
+            raise ValueError(f"Expected input to have 4D tensor")
+        
         return self.model(x)
+    
 
 
 
