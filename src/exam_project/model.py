@@ -23,7 +23,7 @@ if __name__ == "__main__":
     print(f"Number of parameters: {sum(p.numel() for p in model.parameters())}")
 
     
-    dummy_input = torch.randn(1, 3, 300, 300)
+    dummy_input = torch.randn(1, 3, 224, 224)
     output = model(dummy_input)
     print(output)
     print(f"Output shape: {output.shape}")
