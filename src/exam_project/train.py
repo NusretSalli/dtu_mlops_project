@@ -10,7 +10,7 @@ from data import melanoma_data
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu")
 
-def train(lr: float = 0.001, batch_size: int = 32, epochs: int = 10) -> None:
+def train(lr: float = 0.0009806, batch_size: int = 16, epochs: int = 10) -> None:
     """Train a model on Melanoma dataset."""
 
     wandb.init(
