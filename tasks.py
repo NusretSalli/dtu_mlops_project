@@ -26,7 +26,7 @@ def requirements(ctx: Context, installtype: str = "pip") -> None:
         ctx.run("uv pip install -U pip setuptools wheel", echo=True, pty=not WINDOWS)
         ctx.run("uv pip install -r requirements.txt", echo=True, pty=not WINDOWS)
         ctx.run("uv pip install -e .", echo=True, pty=not WINDOWS)
-    
+
 
 
 @task(requirements)
