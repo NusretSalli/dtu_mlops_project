@@ -1,5 +1,5 @@
 from fastapi import FastAPI, File, UploadFile
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, JSONResponse
 import torch
 from captum.attr import IntegratedGradients, Saliency, GradientShap, Occlusion, Lime
 import matplotlib.pyplot as plt
@@ -8,6 +8,8 @@ from PIL import Image
 import numpy as np
 import base64
 from src.exam_project.model import ResNet18
+from matplotlib.colors import LinearSegmentedColormap
+from captum.attr import visualization as viz
 
 app = FastAPI()
 
@@ -31,7 +33,7 @@ def normalize_attribution(attr: np.ndarray) -> np.ndarray:
 
 def plot_attributions(image: torch.Tensor, attributions: dict) -> str:
     """Plot the attributions and return the plot as a base64 string."""
-    fig, axes = plt.subplots(2, 3, figsize=(18, 12))
+    fig, axes = plt.subplots(2, 2, figsize=(16, 16))
     axes = axes.flatten()
 
     # Plot the original image
@@ -77,18 +79,10 @@ async def predict(file: UploadFile = File(...)):
     baseline_dist = torch.zeros_like(image_tensor).repeat((5, 1, 1, 1))
     attributions_gshap = gshap.attribute(image_tensor, baselines=baseline_dist, target=predicted.item(), n_samples=100).squeeze().permute(1, 2, 0).detach().numpy()
 
-    occlusion = Occlusion(model)
-    attributions_occlusion = occlusion.attribute(image_tensor, target=predicted.item(), sliding_window_shapes=(1, 15, 15), strides=(1, 8, 8)).squeeze().permute(1, 2, 0).detach().numpy()
-
-    lime = Lime(model)
-    attributions_lime = lime.attribute(image_tensor, target=predicted.item(), n_samples=500, perturbations_per_eval=64).squeeze().permute(1, 2, 0).detach().numpy()
-
     attributions = {
         "Integrated Gradients": attributions_ig,
         "Saliency": saliency_map,
-        "GradientSHAP": attributions_gshap,
-        "Occlusion": attributions_occlusion,
-        "LIME": attributions_lime
+        "GradientSHAP": attributions_gshap
     }
 
     plot_base64 = plot_attributions(image_tensor, attributions)
