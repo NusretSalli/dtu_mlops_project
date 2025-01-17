@@ -4,3 +4,6 @@ captum==0.7.0
 matplotlib==3.10.0
 Pillow==11.1.0
 numpy==2.2.1
+uvicorn==0.34.0
+torchvision==0.20.1
+python-multipart==0.0.20
