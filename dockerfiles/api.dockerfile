@@ -7,10 +7,15 @@ RUN apt update && \
 
 COPY src src/
 COPY models models/
-COPY requirements_api requirements_api
+COPY requirements_api.txt requirements_api.txt
 COPY README.md README.md
 COPY pyproject.toml pyproject.toml
 
-RUN --mount=type=cache,target=/root/.cache/pip pip install -r requirements_backend.txt
+# Copy the service account key (ensure this is temporarily added and managed securely)
+COPY best-mlops-project-de71c25e08be.json key.json
+# Set environment variables for Google Cloud authentication
+ENV GOOGLE_APPLICATION_CREDENTIALS="key.json"
 
-ENTRYPOINT ["uvicorn", "src/exam_project/api:app", "--host", "0.0.0.0", "--port", "8000"]
+RUN --mount=type=cache,target=/root/.cache/pip pip install -r requirements_api.txt
+
+ENTRYPOINT ["uvicorn", "src.exam_project.api:app", "--host", "0.0.0.0", "--port", "8000"]
