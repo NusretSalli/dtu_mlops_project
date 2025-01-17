@@ -9,6 +9,8 @@ import numpy as np
 import base64
 from src.exam_project.model import ResNet18
 import os
+from google.cloud import storage
+import io
 
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 
@@ -16,8 +18,16 @@ app = FastAPI()
 
 # Load the model
 model = ResNet18()
-model.load_state_dict(torch.load("models/model.pth", weights_only=True, map_location=torch.device("cpu")))
-model.eval()
+
+
+BUCKET_NAME = "best_mlops_bucket"
+MODEL_FILE = "models/model.pth"
+client = storage.Client()
+bucket = client.bucket(BUCKET_NAME)
+blob = bucket.blob(MODEL_FILE)
+model_bytes = blob.download_as_bytes()
+buffer = io.BytesIO(model_bytes)
+model.load_state_dict(torch.load(buffer, map_location=torch.device('cpu'),weights_only=True))
 
 # Define the path to the default images
 DEFAULT_IMAGES_PATH = "api_default_data"

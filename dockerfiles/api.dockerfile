@@ -7,10 +7,10 @@ RUN apt update && \
 
 COPY src src/
 COPY models models/
-COPY requirements_api requirements_api
+COPY requirements_api.txt requirements_api.txt
 COPY README.md README.md
 COPY pyproject.toml pyproject.toml
 
-RUN --mount=type=cache,target=/root/.cache/pip pip install -r requirements_backend.txt
+RUN --mount=type=cache,target=/root/.cache/pip pip install -r requirements_api.txt
 
-ENTRYPOINT ["uvicorn", "src/exam_project/api:app", "--host", "0.0.0.0", "--port", "8000"]
+ENTRYPOINT ["uvicorn", "src.exam_project.api:app", "--host", "0.0.0.0", "--port", "8000"]

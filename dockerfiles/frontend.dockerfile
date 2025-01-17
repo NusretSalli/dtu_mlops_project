@@ -6,11 +6,10 @@ RUN apt update && \
     apt clean && rm -rf /var/lib/apt/lists/*
 
 
-COPY requirements_frontend requirements_frontend
+COPY requirements_frontend.txt requirements_frontend.txt
+COPY src/exam_project/frontend.py frontend.py
 COPY pyproject.toml pyproject.toml
 
 RUN --mount=type=cache,target=/root/.cache/pip pip install -r requirements_frontend.txt
 
-EXPOSE $PORT
-
-CMD ["streamlit", "run", "frontend.py", "--server.port", "$PORT"]
+CMD ["streamlit", "run", "frontend.py", "--server.port", "8000"]
