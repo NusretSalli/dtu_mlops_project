@@ -3,7 +3,7 @@ name: DVC Workflow
 on:
   pull_request:
     branches:
-    - [main , master ]
+    - [main , master]
     paths:
     - '**/data/raw/**'
 
