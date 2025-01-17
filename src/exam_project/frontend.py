@@ -5,7 +5,7 @@ import io
 from base64 import b64decode
 
 # Define the FastAPI backend URL
-API_URL = "http://127.0.0.1:8000/predict/" 
+API_URL = "http://127.0.0.1:8000/predict/"
 
 # Set Streamlit page configuration
 st.set_page_config(page_title="Image Attribution Visualization", layout="centered")
@@ -14,7 +14,7 @@ st.set_page_config(page_title="Image Attribution Visualization", layout="centere
 st.title("Image Attribution Visualization")
 st.markdown(
     """
-    Welcome to the **NAME**! 
+    Welcome to the **NAME**!
     Upload an image to view **attribution visualizations** generated using the following (captum):
     - **Integrated Gradients**
     - **Saliency**
