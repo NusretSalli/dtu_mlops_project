@@ -15,7 +15,7 @@ st.set_page_config(page_title="Image Attribution Visualization", layout="centere
 st.title("Image Attribution Visualization")
 st.markdown(
     """
-    Welcome to the **Image Attribution Visualization App**! 
+    Welcome to the **Image Attribution Visualization App**!
     Upload an image or select a default image to view **attribution visualizations**.
     """
 )
