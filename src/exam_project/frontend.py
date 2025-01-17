@@ -1,11 +1,12 @@
 import streamlit as st
 import requests
 from PIL import Image
+import pandas as pd
 import io
 from base64 import b64decode
 
 # Define the FastAPI backend URL
-API_URL = "http://127.0.0.1:8000/predict/"
+API_URL = "http://127.0.0.1:8000"
 
 # Set Streamlit page configuration
 st.set_page_config(page_title="Image Attribution Visualization", layout="centered")
@@ -14,56 +15,67 @@ st.set_page_config(page_title="Image Attribution Visualization", layout="centere
 st.title("Image Attribution Visualization")
 st.markdown(
     """
-    Welcome to the **NAME**!
-    Upload an image to view **attribution visualizations** generated using the following (captum):
-    - **Integrated Gradients**
-    - **Saliency**
-    - **GradientSHAP**
-
-    These visualizations help interpret the predictions of the deep learning model by highlighting important regions in the image.
+    Welcome to the **Image Attribution Visualization App**!
+    Upload an image or select a default image to view **attribution visualizations**.
     """
 )
 
-# Add a sidebar
+# Sidebar for instructions
 st.sidebar.header("Instructions")
 st.sidebar.markdown(
     """
-    1. Upload an image using the uploader
+    1. Upload an image or select a default image.
     2. Wait for the processing to complete.
-    3. View the attribution results directly in your browser.
+    3. View the prediction, probabilities, and attribution results.
     """
 )
 
-# Image upload
-uploaded_file = st.file_uploader("Upload an image:", type=["png", "jpg", "jpeg"])
+# Fetch default images from the backend
+default_images = requests.get(f"{API_URL}/default_images/").json().get("images", [])
+default_image = st.selectbox("Choose a default image:", ["None"] + default_images)
 
-if uploaded_file is not None:
-    # Display the uploaded image in a smaller size
-    st.markdown("### Uploaded Image:")
-    st.image(uploaded_file, caption="Uploaded Image", use_container_width=True, width=300)
+# Upload image or use selected default image
+uploaded_file = st.file_uploader("Upload an image:", type=["png", "jpg", "jpeg"])
+image_to_use = None
+
+if uploaded_file:
+    image_to_use = uploaded_file.getvalue()
+elif default_image != "None":
+    default_image_response = requests.get(f"{API_URL}/default_images/{default_image}")
+    if default_image_response.status_code == 200:
+        image_to_use = default_image_response.content
+
+# Display and process the selected or uploaded image
+if image_to_use:
+    st.image(io.BytesIO(image_to_use), caption="Selected Image", use_container_width=True)
 
     # Submit the image to the backend
-    with st.spinner("Analyzing the image and generating attributions..."):
-        response = requests.post(
-            API_URL,
-            files={"file": uploaded_file.getvalue()},
-        )
+    with st.spinner("Analyzing the image..."):
+        response = requests.post(f"{API_URL}/predict/", files={"file": image_to_use})
 
     if response.status_code == 200:
-        # Extract the Base64 image from the response
-        content = response.content.decode("utf-8")
-        start_index = content.find("base64,") + len("base64,")
-        base64_image = content[start_index:].strip()
+        result = response.json()
+        prediction = result["prediction"]
+        probabilities = result["probabilities"]
+        attribution_visualization = result["attribution_visualization"]
 
-        # Decode and display the result
-        image_bytes = b64decode(base64_image)
+        # Display prediction
+        st.subheader("Prediction:")
+        st.write(f"Class: {prediction}")
+
+        # Display probabilities
+        st.subheader("Class Probabilities:")
+        prob_df = pd.DataFrame({"Class": [f"Class {i}" for i in range(len(probabilities))], "Probability": probabilities})
+        st.bar_chart(prob_df.set_index("Class"))
+
+        # Display attribution visualization
+        st.subheader("Attribution Visualization:")
+        image_bytes = b64decode(attribution_visualization)
         image = Image.open(io.BytesIO(image_bytes))
-
-        st.markdown("### Attribution Results:")
-        st.image(image, caption="Attribution Results", use_container_width=True)
+        st.image(image, caption="Attribution Visualization", use_container_width=True)
 
         st.success("Analysis complete!")
     else:
         st.error("Failed to process the image. Please try again.")
 else:
-    st.info("Please upload an image to get started.")
+    st.info("Please upload an image or select a default image to get started.")
