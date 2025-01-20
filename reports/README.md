@@ -118,7 +118,7 @@ will check the repositories and the code to verify your answers.
 >
 > Answer:
 
---- question 1 fill here ---
+17
 
 ### Question 2
 > **Enter the study number for each member in the group**
@@ -129,7 +129,7 @@ will check the repositories and the code to verify your answers.
 >
 > Answer:
 
---- question 2 fill here ---
+s204658, s204646, s204658, s223517
 
 ### Question 3
 > **A requirement to the project is that you include a third-party package not covered in the course. What framework**
@@ -143,7 +143,7 @@ will check the repositories and the code to verify your answers.
 >
 > Answer:
 
---- question 3 fill here ---
+The project we have decided to work with is do determine whether or not a patient has melanoma skin cancer by analyzing an image. Since this is related to the patients health, the output of our model should be good but also be able to provide information on why it determined the class to be something specific. In order to do this the framework called "captum" have been used to be able to use several different explainability tool (LIME, IG, SHAP, etc.) to get an understanding on how the model behaves. Captum also fits our stack quite well, since a restnet from pytorch have been used, which allows us for seamlessly integration since they are in the same tech eco-system. 
 
 ## Coding environment
 
@@ -163,7 +163,7 @@ will check the repositories and the code to verify your answers.
 >
 > Answer:
 
---- question 4 fill here ---
+Managing dependencies can be quite difficult without proper setup - therefore the group have opted on using tasks.py and the invoke package to automate some of the tedious processes. We have several requirement files to keep track on our packages - for instance we have the requirement_dev.txt which is packages used solely during development (such as invoke), while requirements.txt is for the application to work. We have several invoke commands to automatically create an environment for you by using the createenvironment command - afterwards the requirements command can be used to download all packages in requirements.txt and with these two simple steps you have all the packages needed to run the "application"! The same steps can be taken to download the dev-tools. When updating the packages the tool called pipreqs have been used to automatically update the requirement.txt file throughout the development process.
 
 ### Question 5
 
@@ -179,7 +179,8 @@ will check the repositories and the code to verify your answers.
 >
 > Answer:
 
---- question 5 fill here ---
+We have used generally speaking not changed any of the structure from the cookiecuter template presented in the course. However, we did add several new files and folders to solve our specific problem. We have added several files such as data_statistics.py and train_gcp.py to get an overview of our data as well as separated training the model via cloud using vertex AI, respectively. Fruthermore, an api_default_data folder have been added for the user to make inference on selected "birthmark" images in case the user have no images themselves to test the model with in our application.
+Otherwise most of the folders have been filled out such as tests, configs, dockerfiles, models, several requirement files, etc. 
 
 ### Question 6
 
@@ -194,7 +195,9 @@ will check the repositories and the code to verify your answers.
 >
 > Answer:
 
---- question 6 fill here ---
+It was clear that working with several people can lead to inconsistent declaration of variables, classes, etc. and therefore a "guideline" was needed. We opted for the PEP-8 guideline, which was also presented during the course to make the code easy to read and understand. However, sometimes formating can be hard uphold when coding and therefore invoke commands have been used again to make sure formatting is being implemented everywhere - this has been done by using the ruff package and mypy in our linting-command to easily format the code.
+
+These concepts matter a lot in larger projects due to the fact that larger projects generally speaking have large amount of code and "interaction" between code. If formatting and "styling" isn't in place, then the code can become very difficult to read and understand, which makes it harder for people to debug or contribute (in open source projects).
 
 ## Version control
 
@@ -213,7 +216,7 @@ will check the repositories and the code to verify your answers.
 >
 > Answer:
 
---- question 7 fill here ---
+Several aspects of the codebase have been tested - we are currently testing both the model and data, as these are the most important part of our project. Specifically we check whether the model have been loaded correctly and whether the data have the correct shape and if they were loaded correctly.
 
 ### Question 8
 
@@ -228,7 +231,7 @@ will check the repositories and the code to verify your answers.
 >
 > Answer:
 
---- question 8 fill here ---
+Even if the code coverage is 100%, then that doesn't mean that the code is error free. If we get 0 error, then that is solely because the tests that have been created is good, but there might be bugs or errors that we haven't considered testing (for instance edge cases or obscure circumstances) which won't be registered.
 
 ### Question 9
 
@@ -243,7 +246,7 @@ will check the repositories and the code to verify your answers.
 >
 > Answer:
 
---- question 9 fill here ---
+Both branches and pull requests have been used during our development. Working directly in the master branch is very dangerous as changes "can" result in bugs and errors which halts the process (have to revert to a previous commit). To circumvent this problem, branches can be used - when a certain feature wants to be implemented, a new branch can be made that essentially will contain the implemented feature. When satisfied a pull request can be created and the group members can look at the changes made (and what files it affects). This is very neat, since CI can be implmeneted using github actions where the merge can also only happen if all the tests have been correctlly completed. 
 
 ### Question 10
 
@@ -275,7 +278,7 @@ will check the repositories and the code to verify your answers.
 >
 > Answer:
 
---- question 11 fill here ---
+As mentioned previously, Github Actions is used to implement continuous integration. We test multiple operating system (OS) to make sure that the codebase is OS agnostic. Formatting is also being run, to make sure that all code is being formatted correctly before being integrated to main.
 
 ## Running code and tracking experiments
 
@@ -294,7 +297,7 @@ will check the repositories and the code to verify your answers.
 >
 > Answer:
 
---- question 12 fill here ---
+At first hydra was being thought of the way to run the experiments, but we went away from that and instead opted for weights and biases as our platform to document our experiments. The project have been shared with all group members which also make it easy to see who ran what and with what configuration. These result are then stored in our weights and biases.
 
 ### Question 13
 
@@ -341,7 +344,7 @@ will check the repositories and the code to verify your answers.
 >
 > Answer:
 
---- question 15 fill here ---
+We have created several docker files during the project: One for training using vertex AI, and two for deployment of our backend and frontend. You can readily build them and after being built, you can simply run them using the 'docker run' command: Link to the training docker where the other files also reside: <dockerfiles/train.dockerfile>
 
 ### Question 16
 
@@ -356,7 +359,7 @@ will check the repositories and the code to verify your answers.
 >
 > Answer:
 
---- question 16 fill here ---
+Members have different way of debugging the code. However one thing that all did was to put a few print statements to get a clear understanding of the behaviour of the code. Another approach that people also used is VSC's debugging panel, that works wonderfully. However this was mainly used when the error message was unclear and therefore difficult to understand what type of error the code outputted.
 
 ## Working in the cloud
 
@@ -373,7 +376,11 @@ will check the repositories and the code to verify your answers.
 >
 > Answer:
 
---- question 17 fill here ---
+Several Services have been used to make this project work: 
+
+- Data storage (bucket): A project bucket has been created that will contain all the data and models that is being used to run the application. This makes it easy to have a centralized storage where we can freely add or retrieve data from.
+- Vertex AI: This is a platform to build and deploy models in a simpler manner. We have used it to train our restnet on the data which reside in the bucket.
+- Cloud run:
 
 ### Question 18
 
@@ -397,7 +404,15 @@ will check the repositories and the code to verify your answers.
 >
 > Answer:
 
---- question 19 fill here ---
+![alt text](bucket1.png)
+
+Looking specifically in best_mlops_bucket, which contain our data we see the following:
+
+![alt text](best_mlops_bucket.png)
+
+We see that we have several folders, some for the data (both raw and processed) and some for the models.
+
+
 
 ### Question 20
 
@@ -406,7 +421,15 @@ will check the repositories and the code to verify your answers.
 >
 > Answer:
 
---- question 20 fill here ---
+An image that shows the docker foldes used in the project can be seen below:
+
+![alt text](overall_docker_image.png)
+
+Where the api-artifact is the docker image for our application while the other folder is for training - looking further into the api-artifact we have these:
+
+![alt text](api_docker_image.png)
+
+Where it is seen we have different verions of the backend and frontend
 
 ### Question 21
 
@@ -415,7 +438,9 @@ will check the repositories and the code to verify your answers.
 >
 > Answer:
 
---- question 21 fill here ---
+![alt text](cloud_build_17jan.png)
+
+It is clear that several builds have been run, some of them failing and some of them actually succeeding.
 
 ### Question 22
 
@@ -430,7 +455,7 @@ will check the repositories and the code to verify your answers.
 >
 > Answer:
 
---- question 22 fill here ---
+As mentioned previously, Vertex AI have been used to train the model - this has been done by using the train_gcp.py file which trains the model on cloud. Not only that in order to actually run the model a config file was created in the configs folder called config_vertexAI.yaml, that specifies which VM to use, which docker image to run, etc. This is very neat, since this enables us to train fast and efficiently over cloud, and thus won't limit the hardware we have in possession locally (we do note however that the credit depletes faster if high-end compute is being rented :D)
 
 ## Deployment
 
@@ -447,7 +472,7 @@ will check the repositories and the code to verify your answers.
 >
 > Answer:
 
---- question 23 fill here ---
+We did manage to write an api for our model - This has been done by using FastAPI, where the model is loaded, the user add an image and afterwards an inference is performed with the predicted class as well as a plot of the attribution created by using captum (in this case Integrated Gradients). The backend then plots the result for the user to see - the user can then add another image if wanted where the process is repeated. 
 
 ### Question 24
 
@@ -463,7 +488,7 @@ will check the repositories and the code to verify your answers.
 >
 > Answer:
 
---- question 24 fill here ---
+As mentioned previously, a backend was created using FastAPI. However, we did accompany the backend with a frontend using streamlit to better create a good looking application, which works as intended locally - specifically in order to run the application locally, the backend needs to be activated and afterwards the streamlit command needs to be run by using the streamlit run function.
 
 ### Question 25
 
