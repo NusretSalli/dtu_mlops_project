@@ -143,7 +143,7 @@ s204658, s204646, s204658, s223517
 >
 > Answer:
 
-The project we have decided to work with is do determine whether or not a patient has melanoma skin cancer by analyzing an image. Since this is related to the patients health, the output of our model should be good but also be able to provide information on why it determined the class to be something specific. In order to do this the framework called "captum" have been used to be able to use several different explainability tool (LIME, IG, SHAP, etc.) to get an understanding on how the model behaves. Captum also fits our stack quite well, since a restnet from pytorch have been used, which allows us for seamlessly integration since they are in the same tech eco-system. 
+The project we have decided to work with is do determine whether or not a patient has melanoma skin cancer by analyzing an image. Since this is related to the patients health, the output of our model should be good but also be able to provide information on why it determined the class to be something specific. In order to do this the framework called "captum" have been used to be able to use several different explainability tool (LIME, IG, SHAP, etc.) to get an understanding on how the model behaves. Captum also fits our stack quite well, since a restnet from pytorch have been used, which allows us for seamlessly integration since they are in the same tech eco-system.
 
 ## Coding environment
 
@@ -180,7 +180,7 @@ Managing dependencies can be quite difficult without proper setup - therefore th
 > Answer:
 
 We have used generally speaking not changed any of the structure from the cookiecuter template presented in the course. However, we did add several new files and folders to solve our specific problem. We have added several files such as data_statistics.py and train_gcp.py to get an overview of our data as well as separated training the model via cloud using vertex AI, respectively. Fruthermore, an api_default_data folder have been added for the user to make inference on selected "birthmark" images in case the user have no images themselves to test the model with in our application.
-Otherwise most of the folders have been filled out such as tests, configs, dockerfiles, models, several requirement files, etc. 
+Otherwise most of the folders have been filled out such as tests, configs, dockerfiles, models, several requirement files, etc.
 
 ### Question 6
 
@@ -246,7 +246,7 @@ Even if the code coverage is 100%, then that doesn't mean that the code is error
 >
 > Answer:
 
-Both branches and pull requests have been used during our development. Working directly in the master branch is very dangerous as changes "can" result in bugs and errors which halts the process (have to revert to a previous commit). To circumvent this problem, branches can be used - when a certain feature wants to be implemented, a new branch can be made that essentially will contain the implemented feature. When satisfied a pull request can be created and the group members can look at the changes made (and what files it affects). This is very neat, since CI can be implmeneted using github actions where the merge can also only happen if all the tests have been correctlly completed. 
+Both branches and pull requests have been used during our development. Working directly in the master branch is very dangerous as changes "can" result in bugs and errors which halts the process (have to revert to a previous commit). To circumvent this problem, branches can be used - when a certain feature wants to be implemented, a new branch can be made that essentially will contain the implemented feature. When satisfied a pull request can be created and the group members can look at the changes made (and what files it affects). This is very neat, since CI can be implmeneted using github actions where the merge can also only happen if all the tests have been correctlly completed.
 
 ### Question 10
 
@@ -376,7 +376,7 @@ Members have different way of debugging the code. However one thing that all did
 >
 > Answer:
 
-Several Services have been used to make this project work: 
+Several Services have been used to make this project work:
 
 - Data storage (bucket): A project bucket has been created that will contain all the data and models that is being used to run the application. This makes it easy to have a centralized storage where we can freely add or retrieve data from.
 - Vertex AI: This is a platform to build and deploy models in a simpler manner. We have used it to train our restnet on the data which reside in the bucket.
@@ -472,7 +472,7 @@ As mentioned previously, Vertex AI have been used to train the model - this has 
 >
 > Answer:
 
-We did manage to write an api for our model - This has been done by using FastAPI, where the model is loaded, the user add an image and afterwards an inference is performed with the predicted class as well as a plot of the attribution created by using captum (in this case Integrated Gradients). The backend then plots the result for the user to see - the user can then add another image if wanted where the process is repeated. 
+We did manage to write an api for our model - This has been done by using FastAPI, where the model is loaded, the user add an image and afterwards an inference is performed with the predicted class as well as a plot of the attribution created by using captum (in this case Integrated Gradients). The backend then plots the result for the user to see - the user can then add another image if wanted where the process is repeated.
 
 ### Question 24
 
