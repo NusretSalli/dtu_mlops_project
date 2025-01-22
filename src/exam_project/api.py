@@ -19,7 +19,6 @@ app = FastAPI()
 # Load the model
 model = ResNet18()
 
-
 BUCKET_NAME = "best_mlops_bucket"
 MODEL_FILE = "models/model.pth"
 client = storage.Client()
