@@ -1,4 +1,4 @@
-name: Run tests
+name: Unit Tests
 
 on: [push, pull_request]
 
@@ -28,7 +28,8 @@ jobs:
           pip install -r requirements_tests.txt
           pip list
 
-      - name: Install Google Cloud SDK
+      - name: Install Google Cloud SDK on Ubuntu
+        if: matrix.operating-system == 'ubuntu-latest'
         run: |
           sudo mkdir -p /etc/apt/sources.list.d
           echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
@@ -37,6 +38,7 @@ jobs:
           sudo apt-get update && sudo apt-get install google-cloud-sdk
 
       - name: Set up Google Cloud credentials
+        if: matrix.operating-system == 'ubuntu-latest'
         env:
           GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
         run: |
