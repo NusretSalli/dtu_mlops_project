@@ -143,7 +143,7 @@ s204658, s204646, s204658, s223517
 >
 > Answer:
 
-The project we have decided to work with is do determine whether or not a patient has melanoma skin cancer by analyzing an image. Since this is related to the patients health, the output of our model should be good but also be able to provide information on why it determined the class to be something specific. In order to do this the framework called "captum" have been used to be able to use several different explainability tool (LIME, IG, SHAP, etc.) to get an understanding on how the model behaves. Captum also fits our stack quite well, since a restnet from pytorch have been used, which allows us for seamlessly integration since they are in the same tech eco-system.
+The project we have decided to work with is to determine whether or not a patient has melanoma skin cancer by analyzing an image. Since this is related to the patients health, the output of our model should be good but also be able to provide information on why it determined the class to be something specific. In order to do this the framework called "captum" have been used to be able to use several different explainability tool (LIME, IG, SHAP, etc.) to get an understanding on how the model behaves. Captum also fits our stack quite well, since a restnet from pytorch have been used, which allows us for seamlessly integration since they are in the same tech eco-system.
 
 ## Coding environment
 
@@ -216,7 +216,7 @@ These concepts matter a lot in larger projects due to the fact that larger proje
 >
 > Answer:
 
-Several aspects of the codebase have been tested - we are currently testing both the model and data, as these are the most important part of our project. Specifically we check whether the model have been loaded correctly and whether the data have the correct shape and if they were loaded correctly.
+Several aspects of the codebase have been tested - we are currently testing both the model and data, as these are the most important part of our project. Specifically we check whether the model have been loaded correctly and whether the data have the correct shape and if they were loaded correctly as well. However, we could easily spend more time and effort on expanding the test cases to also include edge cases and test other applications.
 
 ### Question 8
 
@@ -440,7 +440,7 @@ Where it is seen we have different verions of the backend and frontend
 
 ![alt text](cloud_build_17jan.png)
 
-It is clear that several builds have been run, some of them failing and some of them actually succeeding.
+It is clear that several builds have been run, some of them failing and some of them actually succeeding. The builds include training and first version of the backend and frontend (i.e. the application).
 
 ### Question 22
 
@@ -472,7 +472,7 @@ As mentioned previously, Vertex AI have been used to train the model - this has 
 >
 > Answer:
 
-We did manage to write an api for our model - This has been done by using FastAPI, where the model is loaded, the user add an image and afterwards an inference is performed with the predicted class as well as a plot of the attribution created by using captum (in this case Integrated Gradients). The backend then plots the result for the user to see - the user can then add another image if wanted where the process is repeated.
+We did manage to write an api for our model - This has been done by using FastAPI, where the model is loaded, the user add an image and afterwards inference is performed to get the predicted class as well as a plot of the attribution created by using captum (in this case Integrated Gradients). The frontend then plots the result for the user to see - the user can then add another image if they want where the process is repeated.
 
 ### Question 24
 
@@ -488,7 +488,7 @@ We did manage to write an api for our model - This has been done by using FastAP
 >
 > Answer:
 
-As mentioned previously, a backend was created using FastAPI. However, we did accompany the backend with a frontend using streamlit to better create a good looking application, which works as intended locally - specifically in order to run the application locally, the backend needs to be activated and afterwards the streamlit command needs to be run by using the streamlit run function.
+As mentioned previously, a backend was created using FastAPI. However, we did accompany the backend with a frontend using streamlit to better create a good looking application, which works as intended locally - however, in order to run the application locally, the backend needs to be activated and afterwards the streamlit command needs to be run by using the streamlit run function to display the results and make it for the user to interact with the application.
 
 ### Question 25
 
@@ -503,7 +503,7 @@ As mentioned previously, a backend was created using FastAPI. However, we did ac
 >
 > Answer:
 
---- question 25 fill here ---
+Both unit testing and load testing have been performed to test both the code and the application during development. Unit testing have been performed by using the pytest framework. Load testing have been performed by using the locust framework, wwhere the application have been testing by spawning several users to use the application.
 
 ### Question 26
 
@@ -537,7 +537,7 @@ As mentioned previously, a backend was created using FastAPI. However, we did ac
 >
 > Answer:
 
---- question 27 fill here ---
+By far the most expensive service was
 
 ### Question 28
 
