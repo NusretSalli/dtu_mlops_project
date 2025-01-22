@@ -101,7 +101,7 @@ async def predict(file: UploadFile = File(...)):
     image_features = extract_features(image)
     image_features.append(predicted.item())  # Append the predicted label
     image_features.append("current")  # Indicate it's from the current upload
-    
+
     csv_current = blob_current.download_as_text()
     current_data = pd.read_csv(io.StringIO(csv_current))
 
