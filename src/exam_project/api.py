@@ -19,15 +19,6 @@ app = FastAPI()
 # Load the model
 model = ResNet18()
 
-BUCKET_NAME = "best_mlops_bucket"
-MODEL_FILE = "models/model.pth"
-client = storage.Client()
-bucket = client.bucket(BUCKET_NAME)
-blob = bucket.blob(MODEL_FILE)
-model_bytes = blob.download_as_bytes()
-buffer = io.BytesIO(model_bytes)
-model.load_state_dict(torch.load(buffer, map_location=torch.device('cpu'),weights_only=True))
-
 # Define the path to the default images
 DEFAULT_IMAGES_PATH = "api_default_data"
 
@@ -105,3 +96,15 @@ async def get_default_image(filename: str):
     if os.path.exists(file_path):
         return FileResponse(file_path)
     return JSONResponse(content={"error": "File not found"}, status_code=404)
+
+
+
+if __name__ == "__main__":
+    BUCKET_NAME = "best_mlops_bucket"
+    MODEL_FILE = "models/model.pth"
+    client = storage.Client()
+    bucket = client.bucket(BUCKET_NAME)
+    blob = bucket.blob(MODEL_FILE)
+    model_bytes = blob.download_as_bytes()
+    buffer = io.BytesIO(model_bytes)
+    model.load_state_dict(torch.load(buffer, map_location=torch.device('cpu'),weights_only=True))
