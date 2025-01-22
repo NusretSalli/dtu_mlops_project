@@ -503,7 +503,7 @@ As mentioned previously, a backend was created using FastAPI. However, we did ac
 >
 > Answer:
 
-Both unit testing and load testing have been performed to test both the code and the application during development. Unit testing have been performed by using the pytest framework. Load testing have been performed by using the locust framework, wwhere the application have been testing by spawning several users to use the application.
+Both unit testing and load testing have been performed to test both the code and the application during development. Unit testing have been performed by using the pytest framework. Load testing have been performed by using the locust framework, where the application have been testing by spawning several users to use the application.
 
 ### Question 26
 
@@ -537,7 +537,7 @@ Both unit testing and load testing have been performed to test both the code and
 >
 > Answer:
 
-By far the most expensive service was
+By far the most expensive service was compute engine and vertex AI where members have spent multiple dollars on training or related to training. Working in the cloud is quite useful, especially for large projects or projects that require a lot of compute. This is because the cloud can provide with a lot of compute power that is in no way comparable to the hardwere the group had in possession locally. it also enables the entire group to access the data (via data bucket) and the docker images that is in our artifact registry. This also allows for easy and quick versioning control of the data and models.
 
 ### Question 28
 
