@@ -1,0 +1,12 @@
+
+# config file for Vertex AI training job
+workerPoolSpecs:
+    machineSpec:
+        machineType: n1-highmem-4
+    replicaCount: 1
+    containerSpec:
+        imageUri: europe-west1-docker.pkg.dev/best-mlops-project/dtu-mlops-project-artifact/train_image1:latest
+
+
+# to run the training job on Vertex AI write the following command in the terminal
+# gcloud ai custom-jobs create --region=europe-west1 --display-name=test-run --config=configs/config_vertexAI.yaml
