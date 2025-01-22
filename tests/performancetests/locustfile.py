@@ -1,6 +1,9 @@
 from locust import HttpUser, between, task
 
-# give this URL to HOST in the locust application
+
+# Do load testing using locust by running the following in the command line
+# locust -f tests/performancetests/locustfile.py
+# Give this URL to HOST in the locust application
 API_URL = "https://backend-final-424957459314.europe-west1.run.app"
 
 class MyUser(HttpUser):
