@@ -35,6 +35,9 @@ DEFAULT_IMAGES_PATH = "api_default_data"
 CURRENT_DATA_CSV = "data/current_data.csv"
 ORIGINAL_DATA_CSV = "data/original_data.csv"
 
+blob_current = bucket.blob(CURRENT_DATA_CSV)
+blob_original = bucket.blob(ORIGINAL_DATA_CSV)
+
 def extract_features(image: Image.Image) -> np.ndarray:
     """Extract basic image features from a single image."""
     img_array = np.array(image)  # Convert to numpy array
@@ -98,17 +101,14 @@ async def predict(file: UploadFile = File(...)):
     image_features = extract_features(image)
     image_features.append(predicted.item())  # Append the predicted label
     image_features.append("current")  # Indicate it's from the current upload
-
-    # Load current data CSV or create if it doesn't exist
-    if os.path.exists(CURRENT_DATA_CSV):
-        current_data = pd.read_csv(CURRENT_DATA_CSV)
-    else:
-        current_data = pd.DataFrame(columns=["Average Brightness", "Contrast", "Sharpness", "target", "Dataset"])
+    
+    csv_current = blob_current.download_as_text()
+    current_data = pd.read_csv(io.StringIO(csv_current))
 
     # Append the new data and save to CSV
-    new_data = pd.DataFrame([image_features], columns=["Average Brightness", "Contrast", "Sharpness", "Predicted Label", "Dataset"])
+    new_data = pd.DataFrame([image_features], columns=["Average Brightness", "Contrast", "Sharpness", "target", "Dataset"])
     current_data = pd.concat([current_data, new_data], ignore_index=True)
-    current_data.to_csv(CURRENT_DATA_CSV, index=False)
+    blob_current.upload_from_string(current_data.to_csv(index=False), "text/csv")
 
     return JSONResponse(
         content={
@@ -141,9 +141,14 @@ async def data_drift_analysis():
     """
     Run Evidently drift analysis whenever the endpoint is accessed.
     """
-    if os.path.exists(ORIGINAL_DATA_CSV) and os.path.exists(CURRENT_DATA_CSV):
-        original_data = pd.read_csv(ORIGINAL_DATA_CSV)
-        current_data = pd.read_csv(CURRENT_DATA_CSV)
+
+    csv_current = blob_current.download_as_text()
+    csv_original = blob_original.download_as_text()
+
+    current_data = pd.read_csv(io.StringIO(csv_current))
+    original_data = pd.read_csv(io.StringIO(csv_original))
+
+    if current_data is not None and original_data is not None:
 
         # Create and run drift report
         from evidently.report import Report
