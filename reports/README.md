@@ -299,6 +299,8 @@ As mentioned previously, Github Actions is used to implement continuous integrat
 
 At first hydra was being thought of the way to run the experiments, but we went away from that and instead opted for weights and biases as our platform to document our experiments. The project have been shared with all group members which also make it easy to see who ran what and with what configuration. These result are then stored in our weights and biases.
 
+A link to the report in W&B, where we used our sweep.yaml file to find the optimal hyperparameters - the link to the report can be found here: <https://wandb.ai/s204654-danmarks-tekniske-universitet-dtu/mlops_project/reports/Results-from-training-the-model-using-sweep-yaml--VmlldzoxMTA0Mjg3MA>
+
 ### Question 13
 
 > **Reproducibility of experiments are important. Related to the last question, how did you secure that no information**
@@ -553,7 +555,7 @@ By far the most expensive service was compute engine and vertex AI where members
 >
 > Answer:
 
---- question 28 fill here ---
+We have done several extra features in our project. We created a streamlit frontend for the backend to make it an easier time for the users to navigate the application's functionalities and overall increase the user-friendliness. We have also developed a data drift service, where the application will save the uploaded image and perform feature extraction (brightness, Contrast, Sharpness, etc.) and compare it with our "current" data, which is all done in our /data_drift tab - the frontend also enables us to see this by clicking on the data drift tab. This is very useful, since it can give us an indication on how the model behaves over time and whether or not the model is still relevant.
 
 ### Question 29
 
@@ -584,7 +586,9 @@ By far the most expensive service was compute engine and vertex AI where members
 >
 > Answer:
 
---- question 30 fill here ---
+Overall many struggles have occured during the project. However, the main struggle that all group members have faced is the communication between the developers (the group) and google cloud. This is mainly about having issues concerning permissions and accesses, which was both frustrating and also time consuming. Another part of using the cloud that became frustating is to make sure that github and google cloud was able to communicate with each other properly (by using secret keys), but this also posed some issues.
+Although a lot of issues have been faced, the group have managed to utilize the cloud to build, integrate and deploy a large deep learning model.
+While this wasn't frustating to make it work, building the docker images and deploying them to the cloud could be very time consuming - it was especially annoying when you spent almost an hour to build an image only to realize that a small mistake spelling mistake or a missing file was the reason for the build to fail.
 
 ### Question 31
 
@@ -602,4 +606,4 @@ By far the most expensive service was compute engine and vertex AI where members
 > *We have used ChatGPT to help debug our code. Additionally, we used GitHub Copilot to help write some of our code.*
 > Answer:
 
---- question 31 fill here ---
+All group members have been actively participating in the project equally. Everyone had the opportunity to work on all parts of the project to make sure that everyone had the opportunity to use the tools and frameworks that were used during the course. Generative AI have also been used to help debug the code (i.e. Github Copilot, but also OpenAI's ChatGPT).
