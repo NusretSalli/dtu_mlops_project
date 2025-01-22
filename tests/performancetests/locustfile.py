@@ -1,6 +1,4 @@
-import random
 from locust import HttpUser, between, task
-import requests
 
 # give this URL to HOST in the locust application
 API_URL = "https://backend-final-424957459314.europe-west1.run.app"
