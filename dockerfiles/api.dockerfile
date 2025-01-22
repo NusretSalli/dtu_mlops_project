@@ -7,6 +7,7 @@ RUN apt update && \
 
 COPY src src/
 COPY models models/
+COPY api_default_data api_default_data/
 COPY requirements_api.txt requirements_api.txt
 COPY README.md README.md
 COPY pyproject.toml pyproject.toml
@@ -17,5 +18,7 @@ COPY best-mlops-project-de71c25e08be.json key.json
 ENV GOOGLE_APPLICATION_CREDENTIALS="key.json"
 
 RUN --mount=type=cache,target=/root/.cache/pip pip install -r requirements_api.txt
+
+EXPOSE 8000
 
 ENTRYPOINT ["uvicorn", "src.exam_project.api:app", "--host", "0.0.0.0", "--port", "8000"]

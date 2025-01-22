@@ -27,9 +27,11 @@ blob = bucket.blob(MODEL_FILE)
 model_bytes = blob.download_as_bytes()
 buffer = io.BytesIO(model_bytes)
 model.load_state_dict(torch.load(buffer, map_location=torch.device('cpu'),weights_only=True))
+model.eval()
 
 # Define the path to the default images
 DEFAULT_IMAGES_PATH = "api_default_data"
+
 
 def preprocess_image(image: Image.Image) -> torch.Tensor:
     """Preprocess the uploaded image."""
@@ -49,7 +51,7 @@ def plot_attributions(image: torch.Tensor, attributions: dict) -> str:
     attribution_np = attributions["Integrated Gradients"]
     attribution_np = np.transpose(attribution_np, (1, 2, 0))
 
-    fig, axes = plt.subplots(1, 2, figsize=(12, 6))
+    fig, axes = plt.subplots(1, 2, figsize=(16, 10))
     axes[0].imshow(image_np)
     axes[0].set_title("Original Image")
     axes[0].axis("off")
