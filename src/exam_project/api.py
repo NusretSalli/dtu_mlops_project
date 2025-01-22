@@ -11,6 +11,7 @@ from src.exam_project.model import ResNet18
 import os
 from google.cloud import storage
 import io
+import pandas as pd
 
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 
@@ -27,9 +28,22 @@ blob = bucket.blob(MODEL_FILE)
 model_bytes = blob.download_as_bytes()
 buffer = io.BytesIO(model_bytes)
 model.load_state_dict(torch.load(buffer, map_location=torch.device('cpu'),weights_only=True))
+model.eval()
 
 # Define the path to the default images
 DEFAULT_IMAGES_PATH = "api_default_data"
+CURRENT_DATA_CSV = "data/current_data.csv"
+ORIGINAL_DATA_CSV = "data/original_data.csv"
+
+def extract_features(image: Image.Image) -> np.ndarray:
+    """Extract basic image features from a single image."""
+    img_array = np.array(image)  # Convert to numpy array
+    avg_brightness = np.mean(img_array)
+    contrast = np.std(img_array)
+    sharpness = np.mean(np.abs(np.gradient(img_array)))
+    return [avg_brightness, contrast, sharpness]
+
+
 
 def preprocess_image(image: Image.Image) -> torch.Tensor:
     """Preprocess the uploaded image."""
@@ -80,6 +94,22 @@ async def predict(file: UploadFile = File(...)):
 
     attribution_visualization = plot_attributions(image_tensor, {"Integrated Gradients": attributions_ig})
 
+    # Extract features from the uploaded image
+    image_features = extract_features(image)
+    image_features.append(predicted.item())  # Append the predicted label
+    image_features.append("current")  # Indicate it's from the current upload
+
+    # Load current data CSV or create if it doesn't exist
+    if os.path.exists(CURRENT_DATA_CSV):
+        current_data = pd.read_csv(CURRENT_DATA_CSV)
+    else:
+        current_data = pd.DataFrame(columns=["Average Brightness", "Contrast", "Sharpness", "target", "Dataset"])
+
+    # Append the new data and save to CSV
+    new_data = pd.DataFrame([image_features], columns=["Average Brightness", "Contrast", "Sharpness", "Predicted Label", "Dataset"])
+    current_data = pd.concat([current_data, new_data], ignore_index=True)
+    current_data.to_csv(CURRENT_DATA_CSV, index=False)
+
     return JSONResponse(
         content={
             "prediction": predicted.item(),
@@ -105,3 +135,26 @@ async def get_default_image(filename: str):
     if os.path.exists(file_path):
         return FileResponse(file_path)
     return JSONResponse(content={"error": "File not found"}, status_code=404)
+
+@app.get("/data_drift/")
+async def data_drift_analysis():
+    """
+    Run Evidently drift analysis whenever the endpoint is accessed.
+    """
+    if os.path.exists(ORIGINAL_DATA_CSV) and os.path.exists(CURRENT_DATA_CSV):
+        original_data = pd.read_csv(ORIGINAL_DATA_CSV)
+        current_data = pd.read_csv(CURRENT_DATA_CSV)
+
+        # Create and run drift report
+        from evidently.report import Report
+        from evidently.metrics import DataDriftTable
+        from evidently.metric_preset import DataDriftPreset, DataQualityPreset, TargetDriftPreset
+
+        report = Report(metrics=[DataDriftPreset(), DataQualityPreset(), TargetDriftPreset()])
+        report.run(reference_data=original_data, current_data=current_data)
+        report.save_html("data_drift_with_targets.html")
+
+        # Serve the HTML report
+        return FileResponse("data_drift_with_targets.html")
+
+    return JSONResponse(content={"error": "Original or current data CSV file missing"}, status_code=404)
