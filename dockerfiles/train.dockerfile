@@ -10,10 +10,7 @@ COPY src/exam_project/train_gcp.py src/exam_project/train_gcp.py
 COPY requirements.txt requirements.txt
 COPY pyproject.toml pyproject.toml
 
-# first time:
-#RUN pip install -r requirements.txt --no-cache-dir --verbose
-# after first time:
-RUN --mount=type=cache,target=/root/.cache/pip pip install -r requirements.txt
+RUN pip install -r requirements.txt --no-cache-dir --verbose
 RUN pip install . --no-deps --no-cache-dir --verbose
 
 ENTRYPOINT ["python", "-u", "src/exam_project/train_gcp.py"]
