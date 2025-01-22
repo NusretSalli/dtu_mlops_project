@@ -183,3 +183,5 @@ cython_debug/
 wandb/
 
 /melanoma_10105.jpg
+data/
+/data
