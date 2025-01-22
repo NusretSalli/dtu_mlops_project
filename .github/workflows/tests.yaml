@@ -32,8 +32,16 @@ jobs:
           pip install -r requirements_tests.txt
           pip list
 
+      - name: Set up Google Cloud credentials
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+        run: |
+          echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}" > $HOME/gcloud.json
+          gcloud auth activate-service-account --key-file=$HOME/gcloud.json
 
       - name: Run tests & coverage
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: $HOME/gcloud.json
         run: |
           coverage run -m pytest tests/
           coverage report -m -i
