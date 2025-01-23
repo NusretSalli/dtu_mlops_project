@@ -231,8 +231,8 @@ Several aspects of the codebase have been tested - we are currently testing the 
 >
 > Answer:
 
-The code coverage for the api, data and model are as follows: 40%, 60% and 100%, respectively which is calculated every time a branch is being merged into master.
-Even if the code coverage is 100%, that doesn't mean that the code is error free. If we get 0 error, then that is solely because the tests that have been created is good, but there might be bugs or errors that we haven't considered testing (for instance edge cases or obscure circumstances) which won't be registered.
+The code coverage for the development api code, data and model are as follows: 40%, 60% and 100%, respectively which is calculated every time a branch is being merged into master.
+Even if the code coverage is 100%, that doesn't mean that the code is error free. If we get 0 error, then that is solely because the tests that have been created is good, but there might be bugs or errors that we haven't considered testing (for instance edge cases or obscure circumstances) which won't be registered. We did not make unit tests on our training procedure and the reason for that is quite simple - since we are logging the performance throughout the training process, we can see if the training loss decreasing or not.
 
 ### Question 9
 
@@ -279,7 +279,7 @@ DVC have been linked our data bucket, where cache files have been created as wel
 >
 > Answer:
 
-As mentioned previously, Github Actions is used to implement continuous integration. We test multiple operating systems (OS) to make sure that the codebase is OS agnostic. All of the tests are also run with a specific python version, which in this case is python 3.12. Precommit is also being run, where white trailing spaces, yaml files, etc. are being checked. Formatting is also being run using the ruff package, to make sure that all code is being formatted correctly before being integrated to the master branch. These are done by using the files in the .github/workflows folder (such as codecheck.yaml, tests.yaml and pre-commit.yaml). If we had more time triggers could have been utilized to automatically build the docker images when for instance code changes were made and make cml_data.yaml work for DVC. When the raw data has been changed, then the new data should be preprocessed and automatically pushed using DVC, but this was not working as mentioned earlier. As part of the cookiecutter template, dependabot have been added to automatically look for updates to our packages, which makes it to have the latest compatible versions of the packages.
+As mentioned previously, Github Actions is used to implement continuous integration. We test multiple operating systems (OS) to make sure that the codebase is OS agnostic. All of the tests are also run with a specific python version, which in this case is python 3.12. Pre-commit is also being run, where white trailing spaces, yaml files, etc. are being checked. Formatting is also being run using the ruff package, to make sure that all code is being formatted correctly before being integrated to the master branch. These are done by using the files in the .github/workflows folder (such as codecheck.yaml, tests.yaml and pre-commit.yaml). If we had more time triggers would have been utilized to automatically build the docker images when for instance code changes were made and make cml_data.yaml work for DVC. When the raw data has been changed, then the new data should be preprocessed and automatically pushed using DVC, but this was not working as mentioned earlier. As part of the cookiecutter template, dependabot have been added to automatically look for updates to our packages, which ensures that it has the latest compatible version of the packages and ensures that no compatibility issues arise during the development process or testing.
 
 ## Running code and tracking experiments
 
@@ -315,7 +315,7 @@ A link to the report in W&B, where we used our sweep.yaml file to find the optim
 >
 > Answer:
 
-To ensure that no information was lost during the experiments, we have used weights and biases to document the experiments as mentioned previously. This allowed us to see who ran what project and with what configuration as this is stored. This also makes it easy to reproduce the experiments, since the configuration file is stored in the weights and biases website. Furthermore W&B also stores the output of the experiments in a wandb folder, which again helps with reproducibility of the experiments.
+To ensure that no information was lost during the experiments, we have used weights and biases to document the experiments as mentioned previously. This allowed us to see who ran what project and with what configuration as this is stored. This also makes it easy to reproduce the experiments, since the configuration file is stored in the weights and biases website. Furthermore W&B also stores the output of the experiments in a wandb folder, which again helps with reproducibility of the experiments and improves tracibility if we were ever interested in seeing the output from a previous run. This was especially useful when doing the sweep of our hyperparameters.
 
 ### Question 14
 
@@ -358,9 +358,11 @@ Again we see that depending on the configuration different validation accuracy c
 >
 > Answer:
 
-We have created several docker files during the project: One for training using vertex AI, and two for deployment of our backend and frontend. You can readily build them byy simply running the docker run comamnd - All of our dockerfiles are placed in the dockerfiles folder, where a link to the backend can be seen here: <dockerfiles/backend.dockerfile>
+We have created several docker files during the project: One for the training process using vertex AI, and two for deployment of our backend and frontend. You can readily build them by simply running the docker run command - All of our dockerfiles are placed in the dockerfiles folder, where a link to the backend can be seen here: <dockerfiles/backend.dockerfile>
 To build the backend dockerfile simply type: `docker build -f dockerfiles/backend.dockerfile . -t backend_test:latest`
-Afterwards the backend be run by typing the following command: `docker run backend_test:latest`
+Afterwards the backend can be run by typing the following command: `docker run backend_test:latest`
+
+Make sure that docker desktop is running in order to build and run the docker images.
 
 ### Question 16
 
@@ -508,7 +510,7 @@ A link to the application can be found here: <https://frontend-8020-final-424957
 >
 > Answer:
 
-As mentioned previously, a backend was created using FastAPI. However, we did accompany the backend with a frontend using streamlit to better create a good looking application, which works as intended locally - however, in order to run the application locally, the backend needs to be activated and afterwards the streamlit command needs to be run by using the streamlit run function to display the results and make it for the user to interact with the application.
+As mentioned previously, a backend was created using FastAPI to do most of the computations required for the application to work such model inference and attribution calculation using integrated gradients from the Captum framework. However, we did accompany the backend with a frontend using streamlit to better create a good looking application, which works as intended locally - however, in order to run the application locally, the backend needs to be activated and afterwards the streamlit command needs to be run by using the streamlit run function to display the results and make it for the user to interact with the application.
 The link to the application can be seen here: <https://frontend-8020-final-424957459314.europe-west1.run.app>
 
 ### Question 25
@@ -543,7 +545,7 @@ It is clear that the application is quite slow (especially the predict endpoint)
 >
 > Answer:
 
-As part of our application a small button can be clicked to navigate to our data drift page (link: <https://backend-8020-final-424957459314.europe-west1.run.app/data_drift/>). When an individual uploads an image, the application will perform feature extractions (average brightness, contrast, sharpness and prediction from the model) and compare it with the trained and test data we have had originally (which both are saved in a csv file). This allows us to detect any data drifts and the developers can take actions based on the user's uploaded images to determine whether or not the model is still applicable to the uploaded images.
+As part of our application a small button can be clicked to navigate to our data drift page (link: <https://backend-8020-final-424957459314.europe-west1.run.app/data_drift/>). When an individual uploads an image, the application will perform feature extractions (average brightness, contrast, sharpness and prediction from the model) and compare it with the trained and test data we have had originally (which both are saved in a csv file). This allows us to detect any data drifts and the developers can take actions based on the user's uploaded images to determine whether or not the model is still applicable to the uploaded images. An additional nice feature that could have implemented is the alert feature in case of data drifts.
 
 ## Overall discussion of project
 
@@ -618,6 +620,7 @@ We start the architecture on our local machine where the development of our code
 Overall many struggles have occured during the project. However, the main struggle that all group members have faced is the communication between the developers (the group) and google cloud. This is mainly about having issues concerning permissions and accesses, which was both frustrating and also time consuming. Another part of using the cloud that became frustating is to make sure that github and google cloud was able to communicate with each other properly (by using secret keys), but this also posed some issues.
 Although a lot of issues have been faced, the group have managed to utilize the cloud to build, integrate and deploy a large deep learning model.
 While this wasn't frustating to make it work, building the docker images and deploying them to the cloud could be very time consuming - it was especially annoying when you spent almost an hour to build an image only to realize that a small mistake spelling mistake or a missing file was the reason for the build to fail.
+The documentation from google cloud is often times not that helpful and it was almost always easier to ask external ressources for help such as ChatGPT or Github Copilot. Furthermore, the logged errors from google cloud were often difficult to understand and therefore limited our ability to debug the code effectively.
 
 ### Question 31
 
