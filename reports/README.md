@@ -334,13 +334,13 @@ To ensure that no information was lost during the experiments, we have used weig
 
 All images come from the W&B report which can be found in question 12. The data that have been used have been downloaded from kaggle, which was already split into train and test - as part of our training, we find it benefecial to utilize 10% of the training data as our validation data - therefore the rest of the training data to to fine-tune the model. A screen showing the validation accuracy for different configurations used in our sweep (where batch sizes and learning rate were the two hyperparameters of interest) can be seen below:
 
-![alt text](wandb_val_acc.png)
+![alt text](figures/wandb_val_acc.png)
 
 It is clear that for most configurations, that the accuracy is quite with, which sits at around 85% accuracy, while some configurations performance poorly on the validation set with around 75% accuracy. This is important to track, since it gives us an indication on how the model behaves on unseen data.
 
 Another plot that shows the validation accuracy for the different configurations of batch size and learning rate and its corresponding validation accuracy can be seen below:
 
-![alt text](wandb_val_curve_plot.png)
+![alt text](figures/wandb_val_curve_plot.png)
 
 Again we see that depending on the configuration different validation accuracy can be aqcuired - Note that generally speaking a medium learning rate seems to perform best, while higher learning rates seem to generalize poorly on the validation data. Based on the results from the sweep we decided to use batch size = 16 and a learning rate of 0.0009806, which gave us the best validation accuracy at around 88%
 
@@ -421,11 +421,11 @@ Compute engine hasn't been used in this project, since we have used Vertex AI to
 >
 > Answer:
 
-![alt text](bucket1.png)
+![alt text](figures/bucket1.png)
 
 Looking specifically in best_mlops_bucket, which contain our data we see the following:
 
-![alt text](best_mlops_bucket.png)
+![alt text](figures/best_mlops_bucket.png)
 
 We see that we have several folders, some for the data (both raw and processed) and some for the models.
 
@@ -442,11 +442,11 @@ A path to the bucket (which has public access) can be found here: <best_mlops_bu
 
 An image that shows the docker foldes used in the project can be seen below:
 
-![alt text](overall_docker_image.png)
+![alt text](figures/overall_docker_image.png)
 
 Where the api-artifact is the docker image for our application while the other folder is for training - looking further into the api-artifact we have these:
 
-![alt text](api_docker_image.png)
+![alt text](figures/api_docker_image.png)
 
 Where it is seen we have different verions of the backend and frontend
 
@@ -457,7 +457,7 @@ Where it is seen we have different verions of the backend and frontend
 >
 > Answer:
 
-![alt text](cloud_build_17jan.png)
+![alt text](figures/cloud_build_17jan.png)
 
 It is clear that several builds have been run, some of them failing and some of them actually succeeding. The builds include training and first version of the backend and frontend (i.e. the application).
 
@@ -526,7 +526,7 @@ The link to the application can be seen here: <https://frontend-8020-final-42495
 
 Both unit testing and load testing have been performed to test both the code and the application during development. Unit testing have been performed by using the pytest framework. Load testing have been performed by using the locust framework, where the application have been testing by spawning several users to use the application. For load testing a locust file have been made called locustfile.py in test/performancetests folder. We only load tested the backend. Running the locust file with the backend api as our entrypoint (link:<https://backend-8020-final-424957459314.europe-west1.run.app>) we obtain the following chart:
 
-![alt text](locust_chart.png)
+![alt text](figures/locust_chart.png)
 
 It is clear that the application is quite slow (especially the predict endpoint). This is mainly caused by Captum's integrated gradients operation, which takes a long time to compute and also loading the model can be time consuming as well. This also sometimes results in limited access to some of the features in the app, when it is overloaded.
 
@@ -597,7 +597,7 @@ We have done several extra features in our project. We created a streamlit front
 
 An image that shows the overall architecture of the system can be seen below:
 
-![alt text](Architecture_setup.png)
+![alt text](figures/Architecture_setup.png)
 
 We start the architecture on our local machine where the development of our code takes place. We heavily use github and its features such as branches, pull requests and github actions to properly do version control of the code. Using W&B we perform several configurations by running the sweep.yaml file which enabled to find the optimal hyperparameters values, which have been used to train the model on the cloud using Vertex AI, where the resulting model is stored in our google cloud storage bucket. Preprocessing have been performed as well on all the data and have been stored in the same google cloud storage bucket. To enable the user to interact with the model an application have been made using FastAPI and streamlit (backend and frontend, respectively). The images have been built in docker where it afterwards have been deployed to the cloud using the artifact registry. The application is then run on google cloud run, who also uses the data and trained model from the google cloud storage bucket to enable the user to upload images where the model performs inference and predicts whether or not the person has melanoma. In addition we use the functionalities from captum to create an attribution image that assists the user to understand why the model predicted the class it did. The user can also navigate to the data drift page to see how the uploaded images deviate from the original data (if it does).
 
