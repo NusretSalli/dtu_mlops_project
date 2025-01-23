@@ -6,17 +6,18 @@ import io
 from base64 import b64decode
 
 # Define the FastAPI backend URL
-API_URL = "http://127.0.0.1:8000"
+API_URL = "https://backend-8020-final-424957459314.europe-west1.run.app"
 
 # Set Streamlit page configuration
 st.set_page_config(page_title="Image Attribution Visualization", layout="centered")
 
 # App title and description
-st.title("Image Attribution Visualization")
+st.title("Classification of Melanoma Images")
 st.markdown(
     """
-    Welcome to the **Image Attribution Visualization App**!
-    Upload an image or select a default image to view **attribution visualizations**.
+    Welcome to the **Melanoma Classification App**!\n
+    Upload an image or select a default image to view **attribution visualizations**.\n\n
+    **Disclamer**: Always contact your own doctor for medical advice.
     """
 )
 
@@ -29,6 +30,14 @@ st.sidebar.markdown(
     3. View the prediction, probabilities, and attribution results.
     """
 )
+# HTML for the button
+button_html = f"""
+<a href="{API_URL}/data_drift/" target="_blank" style="text-decoration:none;">
+    <button style="padding:10px 20px; font-size:16px; cursor:pointer;">Go to Data Drift Report</button>
+</a>
+"""
+# Render the button
+st.sidebar.markdown(button_html, unsafe_allow_html=True)
 
 # Fetch default images from the backend
 default_images = requests.get(f"{API_URL}/default_images/").json().get("images", [])
@@ -58,20 +67,24 @@ if image_to_use:
         prediction = result["prediction"]
         probabilities = result["probabilities"]
         attribution_visualization = result["attribution_visualization"]
+        result = ["Benign", "Malignant"]
 
         # Display prediction
         st.subheader("Prediction:")
-        st.write(f"Class: {prediction}")
+        st.write(f"Class: {result[prediction]}")
 
         # Display probabilities
         st.subheader("Class Probabilities:")
-        prob_df = pd.DataFrame({"Class": [f"Class {i}" for i in range(len(probabilities))], "Probability": probabilities})
+
+        prob_df = pd.DataFrame({"Class": [f"{result[i]}" for i in range(len(probabilities))], "Probability": probabilities})
         st.bar_chart(prob_df.set_index("Class"))
 
         # Display attribution visualization
-        st.subheader("Attribution Visualization:")
+        st.subheader("Captum Attribution Visualization:")
+        st.write("Captum is used to generate attribution visualizations for the model predictions.")
         image_bytes = b64decode(attribution_visualization)
         image = Image.open(io.BytesIO(image_bytes))
+
         st.image(image, caption="Attribution Visualization", use_container_width=True)
 
         st.success("Analysis complete!")

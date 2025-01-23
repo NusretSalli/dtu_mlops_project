@@ -6,7 +6,7 @@ RUN apt update && \
     apt clean && rm -rf /var/lib/apt/lists/*
 
 COPY src src/
-COPY models models/
+COPY api_default_data api_default_data/
 COPY requirements_api.txt requirements_api.txt
 COPY README.md README.md
 COPY pyproject.toml pyproject.toml
@@ -18,4 +18,6 @@ ENV GOOGLE_APPLICATION_CREDENTIALS="key.json"
 
 RUN --mount=type=cache,target=/root/.cache/pip pip install -r requirements_api.txt
 
-ENTRYPOINT ["uvicorn", "src.exam_project.api:app", "--host", "0.0.0.0", "--port", "8000"]
+EXPOSE 8020
+
+ENTRYPOINT ["uvicorn", "src.exam_project.api:app", "--host", "0.0.0.0", "--port", "8020"]
