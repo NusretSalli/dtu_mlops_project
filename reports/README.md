@@ -524,7 +524,11 @@ The link to the application can be seen here: <https://frontend-8020-final-42495
 >
 > Answer:
 
-Both unit testing and load testing have been performed to test both the code and the application during development. Unit testing have been performed by using the pytest framework. Load testing have been performed by using the locust framework, where the application have been testing by spawning several users to use the application.
+Both unit testing and load testing have been performed to test both the code and the application during development. Unit testing have been performed by using the pytest framework. Load testing have been performed by using the locust framework, where the application have been testing by spawning several users to use the application. For load testing a locust file have been made called locustfile.py in test/performancetests folder. We only load tested the backend. Running the locust file with the backend api as our entrypoint (link:<https://backend-8020-final-424957459314.europe-west1.run.app>) we obtain the following chart:
+
+![alt text](locust_chart.png)
+
+It is clear that the application is quite slow (especially the predict endpoint). This is mainly caused by Captum's integrated gradients operation, which takes a long time to compute and also loading the model can be time consuming as well. This also sometimes results in limited access to some of the features in the app, when it is overloaded.
 
 ### Question 26
 
@@ -539,7 +543,7 @@ Both unit testing and load testing have been performed to test both the code and
 >
 > Answer:
 
---- question 26 fill here ---
+As part of our application a small button can be clicked to navigate to our data drift page (link: <https://backend-8020-final-424957459314.europe-west1.run.app/data_drift/>). When an individual uploads an image, the application will perform feature extractions (average brightness, contrast, sharpness and prediction from the model) and compare it with the trained and test data we have had originally (which both are saved in a csv file). This allows us to detect any data drifts and the developers can take actions based on the user's uploaded images to determine whether or not the model is still applicable to the uploaded images.
 
 ## Overall discussion of project
 
@@ -558,7 +562,7 @@ Both unit testing and load testing have been performed to test both the code and
 >
 > Answer:
 
-By far the most expensive service was compute engine and vertex AI where members have spent multiple dollars on training or related to training. Working in the cloud is quite useful, especially for large projects or projects that require a lot of compute. This is because the cloud can provide with a lot of compute power that is in no way comparable to the hardwere the group had in possession locally. it also enables the entire group to access the data (via data bucket) and the docker images that is in our artifact registry. This also allows for easy and quick versioning control of the data and models.
+By far the most expensive service was compute engine and vertex AI where members have spent multiple dollars on training or related to training. Working in the cloud is quite useful, especially for large projects or projects that require a lot of compute. This is because the cloud can provide with a lot of compute power that is in no way comparable to the hardware the group had in possession locally. It also enables the entire group to access the data (via data bucket) and the docker images that is in our artifact registry. This also allows for easy and quick versioning control of the data and models. While the cloud is very useful, it can also be quite tedious when pushing docker images to cloud where a lot of time was spent waiting on the images to be uploaded and run on the cloud.
 
 ### Question 28
 
@@ -574,7 +578,7 @@ By far the most expensive service was compute engine and vertex AI where members
 >
 > Answer:
 
-We have done several extra features in our project. We created a streamlit frontend for the backend to make it an easier time for the users to navigate the application's functionalities and overall increase the user-friendliness. We have also developed a data drift service, where the application will save the uploaded image and perform feature extraction (brightness, Contrast, Sharpness, etc.) and compare it with our "current" data, which is all done in our /data_drift tab - the frontend also enables us to see this by clicking on the data drift tab. This is very useful, since it can give us an indication on how the model behaves over time and whether or not the model is still relevant.
+We have done several extra features in our project. We created a streamlit frontend for the backend to make it an easier time for the users to navigate the application's functionalities and overall increase the user-friendliness. We have also developed a data drift service, where the application will save the uploaded image and perform feature extraction (brightness, Contrast, Sharpness, etc.) and compare it with our "current" data, which is all done in our /data_drift tab - the frontend also enables us to see this by clicking on the data drift tab. This is very useful, since it can give us an indication on how the model behaves over time and whether or not the model is still relevant as mentioned previously.
 
 ### Question 29
 
