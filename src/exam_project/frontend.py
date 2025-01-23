@@ -6,7 +6,7 @@ import io
 from base64 import b64decode
 
 # Define the FastAPI backend URL
-API_URL = "https://backend-final-424957459314.europe-west1.run.app"
+API_URL = "https://backend-8020-final-424957459314.europe-west1.run.app"
 
 # Set Streamlit page configuration
 st.set_page_config(page_title="Image Attribution Visualization", layout="centered")
@@ -15,8 +15,9 @@ st.set_page_config(page_title="Image Attribution Visualization", layout="centere
 st.title("Classification of Melanoma Images")
 st.markdown(
     """
-    Welcome to the **Melanoma Classification App**!
-    Upload an image or select a default image to view **attribution visualizations**.
+    Welcome to the **Melanoma Classification App**!\n
+    Upload an image or select a default image to view **attribution visualizations**.\n\n
+    **Disclamer**: Always contact your own doctor for medical advice.
     """
 )
 
@@ -29,6 +30,14 @@ st.sidebar.markdown(
     3. View the prediction, probabilities, and attribution results.
     """
 )
+# HTML for the button
+button_html = f"""
+<a href="{API_URL}/data_drift/" target="_blank" style="text-decoration:none;">
+    <button style="padding:10px 20px; font-size:16px; cursor:pointer;">Go to Data Drift Report</button>
+</a>
+"""
+# Render the button
+st.sidebar.markdown(button_html, unsafe_allow_html=True)
 
 # Fetch default images from the backend
 default_images = requests.get(f"{API_URL}/default_images/").json().get("images", [])

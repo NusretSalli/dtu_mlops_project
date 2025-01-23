@@ -12,6 +12,6 @@ COPY pyproject.toml pyproject.toml
 
 RUN --mount=type=cache,target=/root/.cache/pip pip install -r requirements_frontend.txt
 
-EXPOSE 8000
+EXPOSE 8020
 
-CMD ["streamlit", "run", "frontend.py", "--server.port", "8000", "--server.address=0.0.0.0"]
+CMD ["streamlit", "run", "frontend.py", "--server.port", "8020", "--server.address=0.0.0.0"]

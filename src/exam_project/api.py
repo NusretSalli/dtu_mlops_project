@@ -19,7 +19,6 @@ app = FastAPI()
 
 # Load the model
 model = ResNet18()
-
 BUCKET_NAME = "best_mlops_bucket"
 MODEL_FILE = "models/model.pth"
 client = storage.Client()
@@ -55,6 +54,7 @@ def preprocess_image(image: Image.Image) -> torch.Tensor:
     image_array = np.array(image, dtype=np.float32) / 255.0
     image_tensor = torch.tensor(image_array).permute(2, 0, 1).unsqueeze(0)
     return image_tensor
+
 
 def plot_attributions(image: torch.Tensor, attributions: dict) -> str:
     """
@@ -101,13 +101,12 @@ async def predict(file: UploadFile = File(...)):
     # Extract features from the uploaded image
     image_features = extract_features(image)
     image_features.append(predicted.item())  # Append the predicted label
-    image_features.append("current")  # Indicate it's from the current upload
 
     csv_current = blob_current.download_as_text()
     current_data = pd.read_csv(io.StringIO(csv_current))
 
     # Append the new data and save to CSV
-    new_data = pd.DataFrame([image_features], columns=["Average Brightness", "Contrast", "Sharpness", "target", "Dataset"])
+    new_data = pd.DataFrame([image_features], columns=["Average Brightness", "Contrast", "Sharpness", "target"])
     current_data = pd.concat([current_data, new_data], ignore_index=True)
     blob_current.upload_from_string(current_data.to_csv(index=False), "text/csv")
 
@@ -148,6 +147,17 @@ async def data_drift_analysis():
 
     current_data = pd.read_csv(io.StringIO(csv_current))
     original_data = pd.read_csv(io.StringIO(csv_original))
+
+    # Map string labels to integers if necessary
+    target_mapping = {'benign': 0, 'malignant': 1}  # Adjust based on your data
+    if current_data['target'].dtype == object:
+        current_data['target'] = current_data['target'].map(target_mapping)
+    if original_data['target'].dtype == object:
+        original_data['target'] = original_data['target'].map(target_mapping)
+
+    #if current_data.isnull().any().any() or original_data.isnull().any().any():
+    #    return JSONResponse(content={"error": "Null values detected after mapping targets"}, status_code=400)
+
 
     if current_data is not None and original_data is not None:
 
