@@ -48,68 +48,68 @@ will check the repositories and the code to verify your answers.
 
 ### Week 1
 
-* [ ] Create a git repository (M5)
-* [ ] Make sure that all team members have write access to the GitHub repository (M5)
-* [ ] Create a dedicated environment for you project to keep track of your packages (M2)
-* [ ] Create the initial file structure using cookiecutter with an appropriate template (M6)
-* [ ] Fill out the `data.py` file such that it downloads whatever data you need and preprocesses it (if necessary) (M6)
-* [ ] Add a model to `model.py` and a training procedure to `train.py` and get that running (M6)
-* [ ] Remember to fill out the `requirements.txt` and `requirements_dev.txt` file with whatever dependencies that you
+* [X] Create a git repository (M5)
+* [X] Make sure that all team members have write access to the GitHub repository (M5)
+* [X] Create a dedicated environment for you project to keep track of your packages (M2)
+* [X] Create the initial file structure using cookiecutter with an appropriate template (M6)
+* [X] Fill out the `data.py` file such that it downloads whatever data you need and preprocesses it (if necessary) (M6)
+* [X] Add a model to `model.py` and a training procedure to `train.py` and get that running (M6)
+* [X] Remember to fill out the `requirements.txt` and `requirements_dev.txt` file with whatever dependencies that you
     are using (M2+M6)
-* [ ] Remember to comply with good coding practices (`pep8`) while doing the project (M7)
-* [ ] Do a bit of code typing and remember to document essential parts of your code (M7)
-* [ ] Setup version control for your data or part of your data (M8)
-* [ ] Add command line interfaces and project commands to your code where it makes sense (M9)
-* [ ] Construct one or multiple docker files for your code (M10)
-* [ ] Build the docker files locally and make sure they work as intended (M10)
-* [ ] Write one or multiple configurations files for your experiments (M11)
-* [ ] Used Hydra to load the configurations and manage your hyperparameters (M11)
-* [ ] Use profiling to optimize your code (M12)
-* [ ] Use logging to log important events in your code (M14)
-* [ ] Use Weights & Biases to log training progress and other important metrics/artifacts in your code (M14)
-* [ ] Consider running a hyperparameter optimization sweep (M14)
-* [ ] Use PyTorch-lightning (if applicable) to reduce the amount of boilerplate in your code (M15)
+* [X] Remember to comply with good coding practices (`pep8`) while doing the project (M7)
+* [X] Do a bit of code typing and remember to document essential parts of your code (M7)
+* [] Setup version control for your data or part of your data (M8)
+* [X] Add command line interfaces and project commands to your code where it makes sense (M9)
+* [X] Construct one or multiple docker files for your code (M10)
+* [X] Build the docker files locally and make sure they work as intended (M10)
+* [X] Write one or multiple configurations files for your experiments (M11)
+* [] Used Hydra to load the configurations and manage your hyperparameters (M11)
+* [] Use profiling to optimize your code (M12)
+* [X] Use logging to log important events in your code (M14)
+* [X] Use Weights & Biases to log training progress and other important metrics/artifacts in your code (M14)
+* [X] Consider running a hyperparameter optimization sweep (M14)
+* [] Use PyTorch-lightning (if applicable) to reduce the amount of boilerplate in your code (M15)
 
 ### Week 2
 
-* [ ] Write unit tests related to the data part of your code (M16)
-* [ ] Write unit tests related to model construction and or model training (M16)
-* [ ] Calculate the code coverage (M16)
-* [ ] Get some continuous integration running on the GitHub repository (M17)
-* [ ] Add caching and multi-os/python/pytorch testing to your continuous integration (M17)
-* [ ] Add a linting step to your continuous integration (M17)
-* [ ] Add pre-commit hooks to your version control setup (M18)
-* [ ] Add a continues workflow that triggers when data changes (M19)
-* [ ] Add a continues workflow that triggers when changes to the model registry is made (M19)
-* [ ] Create a data storage in GCP Bucket for your data and link this with your data version control setup (M21)
+* [X] Write unit tests related to the data part of your code (M16)
+* [X] Write unit tests related to model construction and or model training (M16)
+* [X] Calculate the code coverage (M16)
+* [X] Get some continuous integration running on the GitHub repository (M17)
+* [X] Add caching and multi-os/python/pytorch testing to your continuous integration (M17)
+* [X] Add a linting step to your continuous integration (M17)
+* [X] Add pre-commit hooks to your version control setup (M18)
+* [] Add a continues workflow that triggers when data changes (M19)
+* [] Add a continues workflow that triggers when changes to the model registry is made (M19)
+* [X] Create a data storage in GCP Bucket for your data and link this with your data version control setup (M21)
 * [ ] Create a trigger workflow for automatically building your docker images (M21)
-* [ ] Get your model training in GCP using either the Engine or Vertex AI (M21)
-* [ ] Create a FastAPI application that can do inference using your model (M22)
-* [ ] Deploy your model in GCP using either Functions or Run as the backend (M23)
-* [ ] Write API tests for your application and setup continues integration for these (M24)
-* [ ] Load test your application (M24)
-* [ ] Create a more specialized ML-deployment API using either ONNX or BentoML, or both (M25)
-* [ ] Create a frontend for your API (M26)
+* [X] Get your model training in GCP using either the Engine or Vertex AI (M21)
+* [X] Create a FastAPI application that can do inference using your model (M22)
+* [X] Deploy your model in GCP using either Functions or Run as the backend (M23)
+* [X] Write API tests for your application and setup continues integration for these (M24)
+* [X] Load test your application (M24)
+* [] Create a more specialized ML-deployment API using either ONNX or BentoML, or both (M25)
+* [X] Create a frontend for your API (M26)
 
 ### Week 3
 
-* [ ] Check how robust your model is towards data drifting (M27)
-* [ ] Deploy to the cloud a drift detection API (M27)
-* [ ] Instrument your API with a couple of system metrics (M28)
-* [ ] Setup cloud monitoring of your instrumented application (M28)
-* [ ] Create one or more alert systems in GCP to alert you if your app is not behaving correctly (M28)
-* [ ] If applicable, optimize the performance of your data loading using distributed data loading (M29)
-* [ ] If applicable, optimize the performance of your training pipeline by using distributed training (M30)
-* [ ] Play around with quantization, compilation and pruning for you trained models to increase inference speed (M31)
+* [X] Check how robust your model is towards data drifting (M27)
+* [X] Deploy to the cloud a drift detection API (M27)
+* [] Instrument your API with a couple of system metrics (M28)
+* [] Setup cloud monitoring of your instrumented application (M28)
+* [] Create one or more alert systems in GCP to alert you if your app is not behaving correctly (M28)
+* [] If applicable, optimize the performance of your data loading using distributed data loading (M29)
+* [] If applicable, optimize the performance of your training pipeline by using distributed training (M30)
+* [] Play around with quantization, compilation and pruning for you trained models to increase inference speed (M31)
 
 ### Extra
 
-* [ ] Write some documentation for your application (M32)
-* [ ] Publish the documentation to GitHub Pages (M32)
-* [ ] Revisit your initial project description. Did the project turn out as you wanted?
+* [X] Write some documentation for your application (M32)
+* [] Publish the documentation to GitHub Pages (M32)
+* [X] Revisit your initial project description. Did the project turn out as you wanted?
 * [ ] Create an architectural diagram over your MLOps pipeline
-* [ ] Make sure all group members have an understanding about all parts of the project
-* [ ] Uploaded all your code to GitHub
+* [X] Make sure all group members have an understanding about all parts of the project
+* [X] Uploaded all your code to GitHub
 
 ## Group information
 
@@ -129,7 +129,7 @@ will check the repositories and the code to verify your answers.
 >
 > Answer:
 
-s204658, s204646, s204658, s223517
+s204658, s204646, s204654, s223517
 
 ### Question 3
 > **A requirement to the project is that you include a third-party package not covered in the course. What framework**
@@ -143,7 +143,7 @@ s204658, s204646, s204658, s223517
 >
 > Answer:
 
-The project we have decided to work with is do determine whether or not a patient has melanoma skin cancer by analyzing an image. Since this is related to the patients health, the output of our model should be good but also be able to provide information on why it determined the class to be something specific. In order to do this the framework called "captum" have been used to be able to use several different explainability tool (LIME, IG, SHAP, etc.) to get an understanding on how the model behaves. Captum also fits our stack quite well, since a restnet from pytorch have been used, which allows us for seamlessly integration since they are in the same tech eco-system.
+The project we have decided to work with is to determine whether or not a patient has melanoma skin cancer by analyzing an image. Since this is related to the patient's health, the output of our model should be good but also be able to provide information on why it determined the class to be something specific. In order to do this the framework called "captum" have been used to be able to use several different explainability tool (LIME, IG, SHAP, etc.) to get an understanding on how the model behaves. Captum also fits our stack quite well, since a restnet from pytorch have been used, which allows us for seamlessly integration since they are in the same tech eco-system.
 
 ## Coding environment
 
@@ -163,7 +163,7 @@ The project we have decided to work with is do determine whether or not a patien
 >
 > Answer:
 
-Managing dependencies can be quite difficult without proper setup - therefore the group have opted on using tasks.py and the invoke package to automate some of the tedious processes. We have several requirement files to keep track on our packages - for instance we have the requirement_dev.txt which is packages used solely during development (such as invoke), while requirements.txt is for the application to work. We have several invoke commands to automatically create an environment for you by using the createenvironment command - afterwards the requirements command can be used to download all packages in requirements.txt and with these two simple steps you have all the packages needed to run the "application"! The same steps can be taken to download the dev-tools. When updating the packages the tool called pipreqs have been used to automatically update the requirement.txt file throughout the development process.
+Managing dependencies can be quite difficult without proper setup - therefore the group have opted on using tasks.py and the invoke package to automate some of the tedious processes. We have several requirement files to keep track on our packages - for instance we have the requirement_dev.txt which is packages used solely during development (such as invoke), while requirements.txt is for the application to work. We have several invoke commands to automatically create an environment for you by using the createenvironment command - afterwards the requirements command can be used to download all packages in requirements.txt and with these two simple steps you have all the packages needed to run the "application"! The same steps can be taken to download the dev-tools. When updating the packages the tool called pipreqs have been used to automatically update the requirement.txt file throughout the development process. You can also manually insert packages into the requirement files.
 
 ### Question 5
 
@@ -179,7 +179,7 @@ Managing dependencies can be quite difficult without proper setup - therefore th
 >
 > Answer:
 
-We have used generally speaking not changed any of the structure from the cookiecuter template presented in the course. However, we did add several new files and folders to solve our specific problem. We have added several files such as data_statistics.py and train_gcp.py to get an overview of our data as well as separated training the model via cloud using vertex AI, respectively. Fruthermore, an api_default_data folder have been added for the user to make inference on selected "birthmark" images in case the user have no images themselves to test the model with in our application.
+We have generally speaking not changed any of the structure from the cookiecuter template presented in the course. However, we did add several new files and folders to solve our specific problem. We have added several files such as data_statistics.py and train_gcp.py to get an overview of our data as well as separated training the model via cloud using vertex AI, respectively. Furthermore, an api_default_data folder have been added for the user to make inference on selected "birthmark" images in case the user have no images themselves to test the model within our application. Evaluate.py is empty - this is because the evaluation have been integrated inside the visualization.py file.
 Otherwise most of the folders have been filled out such as tests, configs, dockerfiles, models, several requirement files, etc.
 
 ### Question 6
@@ -195,7 +195,7 @@ Otherwise most of the folders have been filled out such as tests, configs, docke
 >
 > Answer:
 
-It was clear that working with several people can lead to inconsistent declaration of variables, classes, etc. and therefore a "guideline" was needed. We opted for the PEP-8 guideline, which was also presented during the course to make the code easy to read and understand. However, sometimes formating can be hard uphold when coding and therefore invoke commands have been used again to make sure formatting is being implemented everywhere - this has been done by using the ruff package and mypy in our linting-command to easily format the code.
+It was clear that working with several people can lead to inconsistent declaration of variables, classes, etc. and therefore a "guideline" was needed. We opted for the PEP-8 guideline, which was also presented during the course to make the code easy to read and understand. However, sometimes formating can be hard to be uphold when coding and therefore invoke commands have been used again to make sure formatting is being implemented everywhere - this has been done by using the ruff package and mypy in our linting-command to easily format the code.
 
 These concepts matter a lot in larger projects due to the fact that larger projects generally speaking have large amount of code and "interaction" between code. If formatting and "styling" isn't in place, then the code can become very difficult to read and understand, which makes it harder for people to debug or contribute (in open source projects).
 
@@ -216,7 +216,7 @@ These concepts matter a lot in larger projects due to the fact that larger proje
 >
 > Answer:
 
-Several aspects of the codebase have been tested - we are currently testing both the model and data, as these are the most important part of our project. Specifically we check whether the model have been loaded correctly and whether the data have the correct shape and if they were loaded correctly.
+Several aspects of the codebase have been tested - we are currently testing the model, data and api, as these are the most important part of our project. Specifically we check whether the model and data have the correct input and out shapes. For the api we are testing whether the class probabilities sum to 1 and if the prediction matches the highest probability class. However, we could spend more time and effort on expanding the test cases to also include edge cases and test other applications.
 
 ### Question 8
 
@@ -231,7 +231,8 @@ Several aspects of the codebase have been tested - we are currently testing both
 >
 > Answer:
 
-Even if the code coverage is 100%, then that doesn't mean that the code is error free. If we get 0 error, then that is solely because the tests that have been created is good, but there might be bugs or errors that we haven't considered testing (for instance edge cases or obscure circumstances) which won't be registered.
+The code coverage for the api, data and model are as follows: 40%, 60% and 100%, respectively which is calculated every time a branch is being merged into master.
+Even if the code coverage is 100%, that doesn't mean that the code is error free. If we get 0 error, then that is solely because the tests that have been created is good, but there might be bugs or errors that we haven't considered testing (for instance edge cases or obscure circumstances) which won't be registered.
 
 ### Question 9
 
@@ -246,7 +247,7 @@ Even if the code coverage is 100%, then that doesn't mean that the code is error
 >
 > Answer:
 
-Both branches and pull requests have been used during our development. Working directly in the master branch is very dangerous as changes "can" result in bugs and errors which halts the process (have to revert to a previous commit). To circumvent this problem, branches can be used - when a certain feature wants to be implemented, a new branch can be made that essentially will contain the implemented feature. When satisfied a pull request can be created and the group members can look at the changes made (and what files it affects). This is very neat, since CI can be implmeneted using github actions where the merge can also only happen if all the tests have been correctlly completed.
+Both branches and pull requests have been used during our development. Working directly in the master branch is very dangerous as changes "can" result in bugs and errors which halts the process (where we have to revert to a previous commit). To circumvent this problem, branches can be used - when a certain feature wants to be implemented, a new branch can be made that essentially contain the implemented feature. When satisfied a pull request can be created and the group members can look at the changes made (and what files it affects). This is very neat, since CI can be implmeneted using github actions where the merge can also only happen if all the tests have been correctlly completed.
 
 ### Question 10
 
@@ -261,7 +262,7 @@ Both branches and pull requests have been used during our development. Working d
 >
 > Answer:
 
---- question 10 fill here ---
+DVC have been linked our data bucket, where cache files have been created as well as the config files associated to DVC. However, while the setup was successful, the commands DVC add and DVC push poses some issues, thus the group instead utilized gcloud functions to load and upload the data. In our project DVC is not essential given the training data is not changing at all, but we could imagine cases that DVC would be essential when the data changes over time and the model is continuously trained. In this case, DVC would be very useful to keep track of the data and the models that are being trained if we want to go back and look at a specific model.
 
 ### Question 11
 
@@ -278,7 +279,7 @@ Both branches and pull requests have been used during our development. Working d
 >
 > Answer:
 
-As mentioned previously, Github Actions is used to implement continuous integration. We test multiple operating system (OS) to make sure that the codebase is OS agnostic. Formatting is also being run, to make sure that all code is being formatted correctly before being integrated to main.
+As mentioned previously, Github Actions is used to implement continuous integration. We test multiple operating systems (OS) to make sure that the codebase is OS agnostic. All of the tests are also run with a specific python version, which in this case is python 3.12. Precommit is also being run, where white trailing spaces, yaml files, etc. are being checked. Formatting is also being run using the ruff package, to make sure that all code is being formatted correctly before being integrated to the master branch. These are done by using the files in the .github/workflows folder (such as codecheck.yaml, tests.yaml and pre-commit.yaml). If we had more time triggers could have been utilized to automatically build the docker images when for instance code changes were made and make cml_data.yaml work for DVC. When the raw data has been changed, then the new data should be preprocessed and automatically pushed using DVC, but this was not working as mentioned earlier. As part of the cookiecutter template, dependabot have been added to automatically look for updates to our packages, which makes it to have the latest compatible versions of the packages.
 
 ## Running code and tracking experiments
 
@@ -297,7 +298,9 @@ As mentioned previously, Github Actions is used to implement continuous integrat
 >
 > Answer:
 
-At first hydra was being thought of the way to run the experiments, but we went away from that and instead opted for weights and biases as our platform to document our experiments. The project have been shared with all group members which also make it easy to see who ran what and with what configuration. These result are then stored in our weights and biases.
+At first hydra was being thought of the way to run the experiments, but we decided instead for weights and biases as our platform to document our experiments. The project have been shared with all group members which also make it easy to see who ran what and with what configuration. These result are then stored in our weights and biases report.
+
+A link to the report in W&B, where we used our sweep.yaml file to find the optimal hyperparameters - the link to the report can be found here: <https://wandb.ai/s204654-danmarks-tekniske-universitet-dtu/mlops_project/reports/Results-from-training-the-model-using-sweep-yaml--VmlldzoxMTA0Mjg3MA>
 
 ### Question 13
 
@@ -312,7 +315,7 @@ At first hydra was being thought of the way to run the experiments, but we went 
 >
 > Answer:
 
---- question 13 fill here ---
+To ensure that no information was lost during the experiments, we have used weights and biases to document the experiments as mentioned previously. This allowed us to see who ran what project and with what configuration as this is stored. This also makes it easy to reproduce the experiments, since the configuration file is stored in the weights and biases website. Furthermore W&B also stores the output of the experiments in a wandb folder, which again helps with reproducibility of the experiments.
 
 ### Question 14
 
@@ -329,7 +332,18 @@ At first hydra was being thought of the way to run the experiments, but we went 
 >
 > Answer:
 
---- question 14 fill here ---
+All images come from the W&B report which can be found in question 12. The data that have been used have been downloaded from kaggle, which was already split into train and test - as part of our training, we find it benefecial to utilize 10% of the training data as our validation data - therefore the rest of the training data to to fine-tune the model. A screen showing the validation accuracy for different configurations used in our sweep (where batch sizes and learning rate were the two hyperparameters of interest) can be seen below:
+
+![alt text](wandb_val_acc.png)
+
+It is clear that for most configurations, that the accuracy is quite with, which sits at around 85% accuracy, while some configurations performance poorly on the validation set with around 75% accuracy. This is important to track, since it gives us an indication on how the model behaves on unseen data.
+
+Another plot that shows the validation accuracy for the different configurations of batch size and learning rate and its corresponding validation accuracy can be seen below:
+
+![alt text](wandb_val_curve_plot.png)
+
+Again we see that depending on the configuration different validation accuracy can be aqcuired - Note that generally speaking a medium learning rate seems to perform best, while higher learning rates seem to generalize poorly on the validation data. Based on the results from the sweep we decided to use batch size = 16 and a learning rate of 0.0009806, which gave us the best validation accuracy at around 88%
+
 
 ### Question 15
 
@@ -344,7 +358,9 @@ At first hydra was being thought of the way to run the experiments, but we went 
 >
 > Answer:
 
-We have created several docker files during the project: One for training using vertex AI, and two for deployment of our backend and frontend. You can readily build them and after being built, you can simply run them using the 'docker run' command: Link to the training docker where the other files also reside: <dockerfiles/train.dockerfile>
+We have created several docker files during the project: One for training using vertex AI, and two for deployment of our backend and frontend. You can readily build them byy simply running the docker run comamnd - All of our dockerfiles are placed in the dockerfiles folder, where a link to the backend can be seen here: <dockerfiles/backend.dockerfile>
+To build the backend dockerfile simply type: `docker build -f dockerfiles/backend.dockerfile . -t backend_test:latest`
+Afterwards the backend be run by typing the following command: `docker run backend_test:latest`
 
 ### Question 16
 
@@ -359,7 +375,7 @@ We have created several docker files during the project: One for training using 
 >
 > Answer:
 
-Members have different way of debugging the code. However one thing that all did was to put a few print statements to get a clear understanding of the behaviour of the code. Another approach that people also used is VSC's debugging panel, that works wonderfully. However this was mainly used when the error message was unclear and therefore difficult to understand what type of error the code outputted.
+Members have different ways of debugging the code. However one thing that all did was to put a few print statements to get a clear understanding of the behaviour of the code. Another approach that people also used is VSC's debugging panel, that works wonderfully. However this was mainly used when the error message was unclear and therefore difficult to understand what type of error the code outputted. We all also followed the idea of starting simple and testing it locally before and then moving to building the docker images and testing them locally before deploying them to the cloud. Google cloud also have good logging capabilities which we have utilized many times to debug the code when building the images were failing. 
 
 ## Working in the cloud
 
@@ -380,7 +396,8 @@ Several Services have been used to make this project work:
 
 - Data storage (bucket): A project bucket has been created that will contain all the data and models that is being used to run the application. This makes it easy to have a centralized storage where we can freely add or retrieve data from.
 - Vertex AI: This is a platform to build and deploy models in a simpler manner. We have used it to train our restnet on the data which reside in the bucket.
-- Cloud run:
+- Cloud run: Cloud run have been used to deploy and run the application continously. This is done by using the docker images for the api (which have been placed in the artifact registry) to create the application.
+Artifact Registry: This has been used to store all of our docker images, which makes it way easier to integrate to other parts of services that google cloud offers (for instance Cloud run and Vertex AI).
 
 ### Question 18
 
@@ -395,7 +412,7 @@ Several Services have been used to make this project work:
 >
 > Answer:
 
---- question 18 fill here ---
+Compute engine hasn't been used in this project, since we have used Vertex AI to train the model instead. We have created a yaml file called config_vertexAI.yaml to be able to train the model on Vertex AI, where the machine type that have been used is n1-highmem-4 with a single replica count. This allowed us to rent the hardware to be able to train the model. However, it still took a long time to train the model. Given more time, more focus on selecting correct machine type could have been done to speed up the training process without expending too many credits.
 
 ### Question 19
 
@@ -411,6 +428,8 @@ Looking specifically in best_mlops_bucket, which contain our data we see the fol
 ![alt text](best_mlops_bucket.png)
 
 We see that we have several folders, some for the data (both raw and processed) and some for the models.
+
+A path to the bucket (which has public access) can be found here: <best_mlops_bucket/data>
 
 
 
@@ -440,7 +459,7 @@ Where it is seen we have different verions of the backend and frontend
 
 ![alt text](cloud_build_17jan.png)
 
-It is clear that several builds have been run, some of them failing and some of them actually succeeding.
+It is clear that several builds have been run, some of them failing and some of them actually succeeding. The builds include training and first version of the backend and frontend (i.e. the application).
 
 ### Question 22
 
@@ -455,7 +474,7 @@ It is clear that several builds have been run, some of them failing and some of 
 >
 > Answer:
 
-As mentioned previously, Vertex AI have been used to train the model - this has been done by using the train_gcp.py file which trains the model on cloud. Not only that in order to actually run the model a config file was created in the configs folder called config_vertexAI.yaml, that specifies which VM to use, which docker image to run, etc. This is very neat, since this enables us to train fast and efficiently over cloud, and thus won't limit the hardware we have in possession locally (we do note however that the credit depletes faster if high-end compute is being rented :D)
+As mentioned previously, Vertex AI have been used to train the model - this has been done by using the train_gcp.py file which trains the model on cloud. Not only that in order to actually run the model a config file was created in the configs folder called config_vertexAI.yaml, that specifies which VM to use, which docker image to run, etc. This is very neat, since this enables us to train fast and efficiently over cloud, and thus won't limit the hardware we have in possession locally. However, our experience was that the training was quite slow where doing it locally was way faster. We suspect it is due to the amount of ressources we have allocated. Given the model only needed to be trained once the training optimization part haven't been our main focus.
 
 ## Deployment
 
@@ -472,7 +491,8 @@ As mentioned previously, Vertex AI have been used to train the model - this has 
 >
 > Answer:
 
-We did manage to write an api for our model - This has been done by using FastAPI, where the model is loaded, the user add an image and afterwards an inference is performed with the predicted class as well as a plot of the attribution created by using captum (in this case Integrated Gradients). The backend then plots the result for the user to see - the user can then add another image if wanted where the process is repeated.
+We did manage to write an api for our model - This has been done by using FastAPI, where the model is loaded, the user add an image and afterwards inference is performed to get the predicted class as well as a plot of the attribution created by using captum (in this case Integrated Gradients). The frontend then plots the result for the user to see - the user can then add another image if they want where the process is repeated. A button that allows the user to navigate to the data drift page have been added as well. As part of the building process, the api was first tested before building and dockers and deployed using the cloud run service. 
+A link to the application can be found here: <https://frontend-8020-final-424957459314.europe-west1.run.app>
 
 ### Question 24
 
@@ -488,7 +508,8 @@ We did manage to write an api for our model - This has been done by using FastAP
 >
 > Answer:
 
-As mentioned previously, a backend was created using FastAPI. However, we did accompany the backend with a frontend using streamlit to better create a good looking application, which works as intended locally - specifically in order to run the application locally, the backend needs to be activated and afterwards the streamlit command needs to be run by using the streamlit run function.
+As mentioned previously, a backend was created using FastAPI. However, we did accompany the backend with a frontend using streamlit to better create a good looking application, which works as intended locally - however, in order to run the application locally, the backend needs to be activated and afterwards the streamlit command needs to be run by using the streamlit run function to display the results and make it for the user to interact with the application. 
+The link to the application can be seen here: <https://frontend-8020-final-424957459314.europe-west1.run.app>
 
 ### Question 25
 
@@ -503,7 +524,11 @@ As mentioned previously, a backend was created using FastAPI. However, we did ac
 >
 > Answer:
 
---- question 25 fill here ---
+Both unit testing and load testing have been performed to test both the code and the application during development. Unit testing have been performed by using the pytest framework. Load testing have been performed by using the locust framework, where the application have been testing by spawning several users to use the application. For load testing a locust file have been made called locustfile.py in test/performancetests folder. We only load tested the backend. Running the locust file with the backend api as our entrypoint (link:<https://backend-8020-final-424957459314.europe-west1.run.app>) we obtain the following chart:
+
+![alt text](locust_chart.png)
+
+It is clear that the application is quite slow (especially the predict endpoint). This is mainly caused by Captum's integrated gradients operation, which takes a long time to compute and also loading the model can be time consuming as well. This also sometimes results in limited access to some of the features in the app, when it is overloaded.
 
 ### Question 26
 
@@ -518,7 +543,7 @@ As mentioned previously, a backend was created using FastAPI. However, we did ac
 >
 > Answer:
 
---- question 26 fill here ---
+As part of our application a small button can be clicked to navigate to our data drift page (link: <https://backend-8020-final-424957459314.europe-west1.run.app/data_drift/>). When an individual uploads an image, the application will perform feature extractions (average brightness, contrast, sharpness and prediction from the model) and compare it with the trained and test data we have had originally (which both are saved in a csv file). This allows us to detect any data drifts and the developers can take actions based on the user's uploaded images to determine whether or not the model is still applicable to the uploaded images.
 
 ## Overall discussion of project
 
@@ -537,7 +562,7 @@ As mentioned previously, a backend was created using FastAPI. However, we did ac
 >
 > Answer:
 
---- question 27 fill here ---
+By far the most expensive service was compute engine and vertex AI where members have spent multiple dollars on training or related to training. Working in the cloud is quite useful, especially for large projects or projects that require a lot of compute. This is because the cloud can provide with a lot of compute power that is in no way comparable to the hardware the group had in possession locally. It also enables the entire group to access the data (via data bucket) and the docker images that is in our artifact registry. This also allows for easy and quick versioning control of the data and models. While the cloud is very useful, it can also be quite tedious when pushing docker images to cloud where a lot of time was spent waiting on the images to be uploaded and run on the cloud.
 
 ### Question 28
 
@@ -553,7 +578,7 @@ As mentioned previously, a backend was created using FastAPI. However, we did ac
 >
 > Answer:
 
---- question 28 fill here ---
+We have done several extra features in our project. We created a streamlit frontend for the backend to make it an easier time for the users to navigate the application's functionalities and overall increase the user-friendliness. We have also developed a data drift service, where the application will save the uploaded image and perform feature extraction (brightness, Contrast, Sharpness, etc.) and compare it with our "current" data, which is all done in our /data_drift tab - the frontend also enables us to see this by clicking on the data drift tab. This is very useful, since it can give us an indication on how the model behaves over time and whether or not the model is still relevant as mentioned previously.
 
 ### Question 29
 
@@ -570,7 +595,13 @@ As mentioned previously, a backend was created using FastAPI. However, we did ac
 >
 > Answer:
 
---- question 29 fill here ---
+An image that shows the overall architecture of the system can be seen below:
+
+![alt text](Architecture_setup.png)
+
+We start the architecture on our local machine where the development of our code takes place. We heavily use github and its features such as branches, pull requests and github actions to properly do version control of the code. Using W&B we perform several configurations by running the sweep.yaml file which enabled to find the optimal hyperparameters values, which have been used to train the model on the cloud using Vertex AI, where the resulting model is stored in our google cloud storage bucket. Preprocessing have been performed as well on all the data and have been stored in the same google cloud storage bucket. To enable the user to interact with the model an application have been made using FastAPI and streamlit (backend and frontend, respectively). The images have been built in docker where it afterwards have been deployed to the cloud using the artifact registry. The application is then run on google cloud run, who also uses the data and trained model from the google cloud storage bucket to enable the user to upload images where the model performs inference and predicts whether or not the person has melanoma. In addition we use the functionalities from captum to create an attribution image that assists the user to understand why the model predicted the class it did. The user can also navigate to the data drift page to see how the uploaded images deviate from the original data (if it does). 
+
+
 
 ### Question 30
 
@@ -584,7 +615,9 @@ As mentioned previously, a backend was created using FastAPI. However, we did ac
 >
 > Answer:
 
---- question 30 fill here ---
+Overall many struggles have occured during the project. However, the main struggle that all group members have faced is the communication between the developers (the group) and google cloud. This is mainly about having issues concerning permissions and accesses, which was both frustrating and also time consuming. Another part of using the cloud that became frustating is to make sure that github and google cloud was able to communicate with each other properly (by using secret keys), but this also posed some issues.
+Although a lot of issues have been faced, the group have managed to utilize the cloud to build, integrate and deploy a large deep learning model.
+While this wasn't frustating to make it work, building the docker images and deploying them to the cloud could be very time consuming - it was especially annoying when you spent almost an hour to build an image only to realize that a small mistake spelling mistake or a missing file was the reason for the build to fail.
 
 ### Question 31
 
@@ -602,4 +635,4 @@ As mentioned previously, a backend was created using FastAPI. However, we did ac
 > *We have used ChatGPT to help debug our code. Additionally, we used GitHub Copilot to help write some of our code.*
 > Answer:
 
---- question 31 fill here ---
+All group members have been actively participating in the project equally. Everyone had the opportunity to work on all parts of the project to make sure that everyone had the opportunity to use the tools and frameworks that were used during the course. Generative AI have also been used to help build and debug the code (i.e. Github Copilot, but also OpenAI's ChatGPT).
