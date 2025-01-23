@@ -1,6 +1,6 @@
 import numpy as np
 from fastapi.testclient import TestClient
-from src.exam_project.api import app
+from src.exam_project.api_dev import app
 import matplotlib
 
 matplotlib.use('Agg')
