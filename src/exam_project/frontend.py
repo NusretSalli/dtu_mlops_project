@@ -75,7 +75,7 @@ if image_to_use:
 
         # Display probabilities
         st.subheader("Class Probabilities:")
-        
+
         prob_df = pd.DataFrame({"Class": [f"{result[i]}" for i in range(len(probabilities))], "Probability": probabilities})
         st.bar_chart(prob_df.set_index("Class"))
 

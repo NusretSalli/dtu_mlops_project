@@ -174,5 +174,3 @@ async def data_drift_analysis():
         return FileResponse("data_drift_with_targets.html")
 
     return JSONResponse(content={"error": "Original or current data CSV file missing"}, status_code=404)
-
-
