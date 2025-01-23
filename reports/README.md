@@ -595,7 +595,13 @@ We have done several extra features in our project. We created a streamlit front
 >
 > Answer:
 
---- question 29 fill here ---
+An image that shows the overall architecture of the system can be seen below:
+
+![alt text](Architecture_setup.png)
+
+We start the architecture on our local machine where the development of our code takes place. We heavily use github and its features such as branches, pull requests and github actions to properly do version control of the code. Using W&B we perform several configurations by running the sweep.yaml file which enabled to find the optimal hyperparameters values, which have been used to train the model on the cloud using Vertex AI, where the resulting model is stored in our google cloud storage bucket. Preprocessing have been performed as well on all the data and have been stored in the same google cloud storage bucket. To enable the user to interact with the model an application have been made using FastAPI and streamlit (backend and frontend, respectively). The images have been built in docker where it afterwards have been deployed to the cloud using the artifact registry. The application is then run on google cloud run, who also uses the data and trained model from the google cloud storage bucket to enable the user to upload images where the model performs inference and predicts whether or not the person has melanoma. In addition we use the functionalities from captum to create an attribution image that assists the user to understand why the model predicted the class it did. The user can also navigate to the data drift page to see how the uploaded images deviate from the original data (if it does). 
+
+
 
 ### Question 30
 
@@ -629,4 +635,4 @@ While this wasn't frustating to make it work, building the docker images and dep
 > *We have used ChatGPT to help debug our code. Additionally, we used GitHub Copilot to help write some of our code.*
 > Answer:
 
-All group members have been actively participating in the project equally. Everyone had the opportunity to work on all parts of the project to make sure that everyone had the opportunity to use the tools and frameworks that were used during the course. Generative AI have also been used to help debug the code (i.e. Github Copilot, but also OpenAI's ChatGPT).
+All group members have been actively participating in the project equally. Everyone had the opportunity to work on all parts of the project to make sure that everyone had the opportunity to use the tools and frameworks that were used during the course. Generative AI have also been used to help build and debug the code (i.e. Github Copilot, but also OpenAI's ChatGPT).
