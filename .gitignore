@@ -185,3 +185,6 @@ wandb/
 /melanoma_10105.jpg
 data/
 /data
+
+# html files
+*.html
