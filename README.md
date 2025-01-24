@@ -11,6 +11,9 @@ Our data for this project is a dataset consiting of 10,000 images with benign an
 <br><br>
 As our classification model we will apply the ResNet-18 with pretrained weights from pytorch. We intend to fine-tune the final fully connected layer on our specific melanoma skin cancer dataset.
 
+## Can we see the application?
+
+Navigating yourself to patrolyourmole.com or <https://frontend-8020-final-424957459314.europe-west1.run.app> would navigate you to the application.
 
 ## Project architecture overview
 
